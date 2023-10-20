@@ -2,6 +2,25 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type MovieType {
+  id: ID!
+  adult: Boolean!
+  backdrop_path: String!
+  title: String!
+  original_language: String!
+  original_title: String!
+  overview: String!
+  poster_path: String!
+  media_type: String!
+  genre_ids: [ID!]!
+  popularity: Float!
+  release_date: String!
+  video: Boolean!
+  vote_average: Float!
+  vote_count: Float!
+}
+
 type Query {
   sayHello: String!
+  getAllMovies(page: Int!): [MovieType!]!
 }
