@@ -7,6 +7,7 @@ import { HttpService } from '@nestjs/axios';
 export class MoviesService {
   private readonly endpoint = process.env.API_URL;
   private readonly accessToken = process.env.ACCESS_TOKEN;
+  private readonly imageEndpoint = process.env.IMAGES_API_URL;
 
   constructor(private readonly httpService: HttpService) {}
 
@@ -15,27 +16,33 @@ export class MoviesService {
     return 'these movies';
   }
 
-  async gethAllMovies(): Promise<[MovieType]> {
-    console.log('--endpoint', this.endpoint);
-    const data: any = this.httpService
-      .get(`${this.endpoint}/trending/movie/day?language=en-US`, {
-        headers: {
-          Authorization: `Bearer ${this.accessToken}`,
-        },
-      })
-      .pipe(
-        map((response) => {
-          console.log('--response', response);
-          return response.data.results;
-        }),
-        catchError((error) => {
-          console.log('--error', error);
-          return throwError(
-            () => new HttpException(JSON.stringify(error), 400),
-          );
-        }),
-      );
-    return data;
+  async getTrendingMovies(): Promise<MovieType[]> {
+    const data = await firstValueFrom(
+      this.httpService
+        .get(`${this.endpoint}/trending/movie/day?language=en-US`, {
+          headers: {
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+        })
+        .pipe(
+          map((response) => {
+            return response.data.results as MovieType[];
+          }),
+          catchError((error) => {
+            console.log('--error', error.message);
+            return throwError(
+              () => new HttpException(JSON.stringify(error.message), 400),
+            );
+          }),
+        ),
+    );
+
+    return data.map((movie) => {
+      return {
+        ...movie,
+        backdrop_path: `${this.imageEndpoint}/original/${movie.backdrop_path}`,
+      };
+    });
   }
 
   // curl --request GET \

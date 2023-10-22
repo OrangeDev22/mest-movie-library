@@ -10,8 +10,8 @@ export class MoviesResolver {
   sayHello() {
     return this.moviesService.fetchMovies();
   }
-  @Query(() => [MovieType], { name: 'getAllMovies' })
-  getAllMovies(@Args('page', { type: () => Int }) id: number) {
-    return this.moviesService.gethAllMovies();
+  @Query(() => [MovieType], { name: 'getTrendingMovies' })
+  getTrendingMovies() {
+    return this.moviesService.getTrendingMovies();
   }
 }

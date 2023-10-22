@@ -22,5 +22,5 @@ type MovieType {
 
 type Query {
   sayHello: String!
-  getAllMovies(page: Int!): [MovieType!]!
+  getTrendingMovies: [MovieType!]!
 }
