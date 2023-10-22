@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Genre {
+  id: ID!
+  name: String!
+}
+
 type MovieType {
   id: ID!
   adult: Boolean!
@@ -12,7 +17,8 @@ type MovieType {
   overview: String!
   poster_path: String!
   media_type: String!
-  genre_ids: [ID!]!
+  genre_ids: [ID!]
+  genres: [Genre!]
   popularity: Float!
   release_date: String!
   video: Boolean!
@@ -23,4 +29,5 @@ type MovieType {
 type Query {
   searchMovie(search: String!): [MovieType!]!
   getTrendingMovies: [MovieType!]!
+  getOneMmovie(id: ID!): MovieType!
 }

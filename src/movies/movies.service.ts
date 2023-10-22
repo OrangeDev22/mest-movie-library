@@ -11,20 +11,49 @@ export class MoviesService {
 
   constructor(private readonly httpService: HttpService) {}
 
+  validateMovie = (data: MovieType) => {
+    return {
+      ...data,
+      poster_path: data.poster_path
+        ? `${this.imageEndpoint}/original${data.poster_path}`
+        : '',
+      media_type: data.media_type || '',
+      backdrop_path: data.backdrop_path
+        ? `${this.imageEndpoint}/original${data.backdrop_path}`
+        : '',
+    };
+  };
+
   remapDataWithImages = (data: MovieType[]) => {
     return data.map((movie) => {
-      return {
-        ...movie,
-        poster_path: movie.poster_path
-          ? `${this.imageEndpoint}/original${movie.poster_path}`
-          : '',
-        media_type: movie.media_type || '',
-        backdrop_path: movie.backdrop_path
-          ? `${this.imageEndpoint}/original${movie.backdrop_path}`
-          : '',
-      };
+      return this.validateMovie(movie);
     });
   };
+
+  async getOneMovie(id: number): Promise<MovieType> {
+    const data = await firstValueFrom(
+      this.httpService
+        .get(`${this.endpoint}/movie/${id}?language=en-US`, {
+          headers: {
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+        })
+        .pipe(
+          map((response) => {
+            console.log('--data', response.data);
+            return response.data as MovieType;
+          }),
+          catchError((error) => {
+            console.log('--error', error.message);
+            return throwError(
+              () => new HttpException(JSON.stringify(error.message), 400),
+            );
+          }),
+        ),
+    );
+    console.log('--validate data', data);
+    return this.validateMovie(data);
+  }
 
   async searchMovie(search: String): Promise<MovieType[]> {
     const data = await firstValueFrom(

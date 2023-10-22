@@ -1,6 +1,15 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
+class Genre {
+  @Field(() => ID)
+  id: number;
+
+  @Field()
+  name: String;
+}
+
+@ObjectType()
 export class MovieType {
   @Field(() => ID)
   id: number;
@@ -29,8 +38,11 @@ export class MovieType {
   @Field()
   media_type: string;
 
-  @Field(() => [ID])
+  @Field(() => [ID], { nullable: true })
   genre_ids: number[];
+
+  @Field(() => [Genre], { nullable: true })
+  genres: Genre[];
 
   @Field()
   popularity: number;
