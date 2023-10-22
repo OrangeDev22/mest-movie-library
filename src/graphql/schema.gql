@@ -21,6 +21,6 @@ type MovieType {
 }
 
 type Query {
-  sayHello: String!
+  searchMovie(search: String!): [MovieType!]!
   getTrendingMovies: [MovieType!]!
 }

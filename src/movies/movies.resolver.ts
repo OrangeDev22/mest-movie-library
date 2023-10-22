@@ -6,9 +6,9 @@ import { MovieType } from './entities/movie.entity';
 export class MoviesResolver {
   constructor(private readonly moviesService: MoviesService) {}
 
-  @Query(() => String)
-  sayHello() {
-    return this.moviesService.fetchMovies();
+  @Query(() => [MovieType])
+  searchMovie(@Args('search', { type: () => String }) search: string) {
+    return this.moviesService.searchMovie(search);
   }
   @Query(() => [MovieType], { name: 'getTrendingMovies' })
   getTrendingMovies() {

@@ -11,9 +11,45 @@ export class MoviesService {
 
   constructor(private readonly httpService: HttpService) {}
 
-  async fetchMovies(): Promise<String> {
-    console.log('fetching movies');
-    return 'these movies';
+  remapDataWithImages = (data: MovieType[]) => {
+    return data.map((movie) => {
+      return {
+        ...movie,
+        poster_path: movie.poster_path
+          ? `${this.imageEndpoint}/original${movie.poster_path}`
+          : '',
+        media_type: movie.media_type || '',
+        backdrop_path: movie.backdrop_path
+          ? `${this.imageEndpoint}/original${movie.backdrop_path}`
+          : '',
+      };
+    });
+  };
+
+  async searchMovie(search: String): Promise<MovieType[]> {
+    const data = await firstValueFrom(
+      this.httpService
+        .get(
+          `${this.endpoint}/search/movie?query=${search}&include_adult=false&language=en-US&page=1`,
+          {
+            headers: {
+              Authorization: `Bearer ${this.accessToken}`,
+            },
+          },
+        )
+        .pipe(
+          map((response) => {
+            return response.data.results as MovieType[];
+          }),
+          catchError((error) => {
+            console.log('--error', error.message);
+            return throwError(
+              () => new HttpException(JSON.stringify(error.message), 400),
+            );
+          }),
+        ),
+    );
+    return this.remapDataWithImages(data);
   }
 
   async getTrendingMovies(): Promise<MovieType[]> {
@@ -36,13 +72,7 @@ export class MoviesService {
           }),
         ),
     );
-
-    return data.map((movie) => {
-      return {
-        ...movie,
-        backdrop_path: `${this.imageEndpoint}/original/${movie.backdrop_path}`,
-      };
-    });
+    return this.remapDataWithImages(data);
   }
 
   // curl --request GET \
