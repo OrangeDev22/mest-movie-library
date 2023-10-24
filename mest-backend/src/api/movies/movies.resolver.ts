@@ -20,4 +20,9 @@ export class MoviesResolver {
   getOneMmovie(@Args('id', { type: () => ID }) id: number) {
     return this.moviesService.getOneMovie(id);
   }
+
+  @Query(() => [MovieType])
+  getSimilarMovies(@Args('id', { type: () => ID }) id: number) {
+    return this.moviesService.getSimilarMovies(id);
+  }
 }

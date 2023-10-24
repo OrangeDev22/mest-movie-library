@@ -31,6 +31,7 @@ export class MoviesService {
   };
 
   async getOneMovie(id: number): Promise<MovieType> {
+    console.log('--value', this.endpoint);
     const data = await firstValueFrom(
       this.httpService
         .get(`${this.endpoint}/movie/${id}?language=en-US`, {
@@ -40,7 +41,6 @@ export class MoviesService {
         })
         .pipe(
           map((response) => {
-            console.log('--data', response.data);
             return response.data as MovieType;
           }),
           catchError((error) => {
@@ -51,8 +51,31 @@ export class MoviesService {
           }),
         ),
     );
-    console.log('--validate data', data);
     return this.validateMovie(data);
+  }
+
+  async getSimilarMovies(id: number): Promise<MovieType[]> {
+    const data = await firstValueFrom(
+      this.httpService
+        .get(`${this.endpoint}/movie/${id}/similar?language=en-US`, {
+          headers: {
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+        })
+        .pipe(
+          map((response) => {
+            // console.log('--data', response.data);
+            return response.data.results as MovieType[];
+          }),
+          catchError((error) => {
+            console.log('--error', error.message);
+            return throwError(
+              () => new HttpException(JSON.stringify(error.message), 400),
+            );
+          }),
+        ),
+    );
+    return this.remapDataWithImages(data);
   }
 
   async searchMovie(search: String): Promise<MovieType[]> {
