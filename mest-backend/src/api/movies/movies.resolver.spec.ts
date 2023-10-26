@@ -22,7 +22,6 @@ describe('MoviesResolver', () => {
 
   it('should return a movie', async () => {
     const result = await resolver.getOneMmovie(120);
-    console.log('--result', result);
     expect(result).toEqual(findOneMovieExpectedValue);
   });
 });
