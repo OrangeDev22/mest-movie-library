@@ -4,7 +4,6 @@ import "./globals.css";
 import Navbar from "@/app/components/Navbar";
 import Providers from "./Providers";
 import { ApolloWrapper } from "./ApolloWrapper";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

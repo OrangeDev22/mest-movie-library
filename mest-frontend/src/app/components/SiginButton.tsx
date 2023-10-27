@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { signIn } from "next-auth/react";
-
 function SiginButton() {
   return (
     <div className="flex gap-x-2 items-center">
