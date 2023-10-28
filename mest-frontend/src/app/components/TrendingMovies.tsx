@@ -1,6 +1,7 @@
 "use client";
 import { gql, useQuery } from "@apollo/client";
 import React from "react";
+import MovieCard from "./MovieCard";
 
 function TrendingMovies() {
   const { data, loading, error } = useQuery(
@@ -30,7 +31,18 @@ function TrendingMovies() {
 
   console.log("==>movies", data);
   console.log("--error", error);
-  return <div>TrendingMovies</div>;
+  return (
+    <div className="space-y-5">
+      <h2 className="font-bold text-xl">Trending Movies</h2>
+      <div className="grid md:grid-cols-3 gap-4">
+        {new Array(20)
+          .fill(() => null)
+          .map((_) => {
+            return <MovieCard />;
+          })}
+      </div>
+    </div>
+  );
 }
 
 export default TrendingMovies;
