@@ -1,16 +1,19 @@
 import React from "react";
 import { upperFirst } from "lodash";
 
-function MovieCard() {
+interface Props {
+  image: string;
+  title: string;
+}
+
+function MovieCard({ image, title }: Props) {
   return (
-    <div className="max-w-xs overflow-hidden space-y-500 text-center rounded-lg m-4">
-      <img
-        src="https://cd929fm.com/wp-content/uploads/2023/07/MV5BY2VjMmU3MjItOTc5Ni00ZGY5LTg4ZGEtNzQ3OTNlZTM0ZGUzXkEyXkFqcGdeQXVyNTMyODM3MTg@._V1_.jpg"
-        alt=""
-        className="aspect-[9/14] rounded-lg"
-      />
-      <div className="font-bold">
-        {upperFirst("they are taking the hobbits to Isengard!")}
+    <div className="card card-compact w-96 bg-base-100 shadow-xl">
+      <figure>
+        <img src={image} alt="movie_title" />
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title">{upperFirst(title)}</h2>
       </div>
     </div>
   );
