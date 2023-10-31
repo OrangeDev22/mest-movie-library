@@ -1,11 +1,18 @@
 import React from "react";
 import TrendingMovies from "./components/TrendingMovies";
 
-function HomePage() {
+function HomePage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const page =
+    typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
+
   return (
     <div>
       HomePage
-      <TrendingMovies />
+      <TrendingMovies page={page} />
     </div>
   );
 }
