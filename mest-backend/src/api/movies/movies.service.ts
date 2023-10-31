@@ -104,14 +104,18 @@ export class MoviesService {
     return this.remapDataWithImages(data);
   }
 
-  async getTrendingMovies(): Promise<MovieType[]> {
+  //https://api.themoviedb.org/3/movie/popular?language=en-US&page=1
+  async getTrendingMovies(page: number): Promise<MovieType[]> {
     const data = await firstValueFrom(
       this.httpService
-        .get(`${this.endpoint}/trending/movie/day?language=en-US`, {
-          headers: {
-            Authorization: `Bearer ${this.accessToken}`,
+        .get(
+          `${this.endpoint}/trending/movie/day?language=en-US&page=${page}`,
+          {
+            headers: {
+              Authorization: `Bearer ${this.accessToken}`,
+            },
           },
-        })
+        )
         .pipe(
           map((response) => {
             return response.data.results as MovieType[];

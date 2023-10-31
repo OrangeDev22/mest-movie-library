@@ -12,8 +12,8 @@ export class MoviesResolver {
   }
 
   @Query(() => [MovieType], { name: 'getTrendingMovies' })
-  getTrendingMovies() {
-    return this.moviesService.getTrendingMovies();
+  getTrendingMovies(@Args('page', { type: () => Number }) page: number) {
+    return this.moviesService.getTrendingMovies(page);
   }
 
   @Query(() => MovieType)

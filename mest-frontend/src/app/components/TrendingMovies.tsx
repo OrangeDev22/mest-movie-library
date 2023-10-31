@@ -5,8 +5,8 @@ import { getClient } from "../../../lib/graphql-client";
 import Link from "next/link";
 
 const GetTrendingMovies = gql`
-  query GetTrendingMovies {
-    getTrendingMovies {
+  query Query($page: Float!) {
+    getTrendingMovies(page: $page) {
       id
       adult
       backdrop_path
@@ -17,6 +17,10 @@ const GetTrendingMovies = gql`
       poster_path
       media_type
       genre_ids
+      genres {
+        id
+        name
+      }
       popularity
       release_date
       video
@@ -31,7 +35,10 @@ interface Props {
 }
 
 async function TrendingMovies({ page }: Props) {
-  const { data } = await getClient().query({ query: GetTrendingMovies });
+  const { data } = await getClient().query({
+    query: GetTrendingMovies,
+    variables: { page },
+  });
 
   return (
     <div className="space-y-5 flex flex-col">
