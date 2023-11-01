@@ -15,11 +15,11 @@ export class MoviesService {
     return {
       ...data,
       poster_path: data.poster_path
-        ? `${this.imageEndpoint}/original${data.poster_path}`
+        ? `${this.imageEndpoint}/w300${data.poster_path}`
         : '',
       media_type: data.media_type || '',
       backdrop_path: data.backdrop_path
-        ? `${this.imageEndpoint}/original${data.backdrop_path}`
+        ? `${this.imageEndpoint}/w300${data.backdrop_path}`
         : '',
     };
   };
