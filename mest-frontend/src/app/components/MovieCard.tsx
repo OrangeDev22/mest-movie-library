@@ -8,12 +8,14 @@ interface Props {
 
 function MovieCard({ image, title }: Props) {
   return (
-    <div className="card card-compact w-96 bg-base-100 shadow-xl">
-      <figure>
-        <img src={image} alt="movie_title" />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">{upperFirst(title)}</h2>
+    <div className="card card-compact max-w-xs bg-base-100 shadow-xl aspect-[9/14] mx-auto">
+      <div className="rounded-lg">
+        <figure>
+          <img src={image} alt="movie_title" className="w-full h-full" />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title">{upperFirst(title)}</h2>
+        </div>
       </div>
     </div>
   );

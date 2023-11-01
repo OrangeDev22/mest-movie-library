@@ -1,8 +1,10 @@
+"use client";
 import { gql, useQuery } from "@apollo/client";
 import React from "react";
 import MovieCard from "./MovieCard";
 import { getClient } from "../../../lib/graphql-client";
 import Link from "next/link";
+import MovieCardSkeleton from "./MovieCardSkeleton";
 
 const GetTrendingMovies = gql`
   query Query($page: Float!) {
@@ -34,11 +36,13 @@ interface Props {
   page: number;
 }
 
-async function TrendingMovies({ page }: Props) {
-  const { data } = await getClient().query({
-    query: GetTrendingMovies,
-    variables: { page },
+function TrendingMovies({ page }: Props) {
+  const { data, loading } = useQuery(GetTrendingMovies, {
+    variables: {
+      page,
+    },
   });
+  console.log("--loading", loading);
 
   return (
     <div className="space-y-5 flex flex-col">
@@ -70,14 +74,25 @@ async function TrendingMovies({ page }: Props) {
         </Link>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-4 items-center justify-items-center">
-        {data.getTrendingMovies.map((movie: any) => (
-          <MovieCard
-            image={movie.poster_path}
-            title={movie.title}
-            key={movie.id}
-          />
-        ))}
+      <div className="grid md:grid-cols-3 gap-4 items-center justify-items-center w-full h-full">
+        {!loading &&
+          data.getTrendingMovies.map((movie: any) => (
+            <div className="w-full h-full">
+              <MovieCard
+                image={movie.poster_path}
+                title={movie.title}
+                key={movie.id}
+              />
+            </div>
+          ))}
+        {loading &&
+          new Array(20).fill(null).map(() => {
+            return (
+              <div className="w-full h-full">
+                <MovieCardSkeleton />
+              </div>
+            );
+          })}
       </div>
     </div>
   );
