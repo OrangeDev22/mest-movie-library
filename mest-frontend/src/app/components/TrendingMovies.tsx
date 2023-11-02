@@ -76,6 +76,7 @@ function TrendingMovies({ page }: Props) {
 
       <div className="grid md:grid-cols-3 gap-4 items-center justify-items-center w-full h-full">
         {!loading &&
+          data.getTrendingMovies &&
           data.getTrendingMovies.map((movie: any) => (
             <div className="w-full h-full">
               <MovieCard
@@ -86,6 +87,7 @@ function TrendingMovies({ page }: Props) {
             </div>
           ))}
         {loading &&
+          !data &&
           new Array(20).fill(null).map(() => {
             return (
               <div className="w-full h-full">
