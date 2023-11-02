@@ -1,5 +1,6 @@
 import React from "react";
 import TrendingMovies from "./components/TrendingMovies";
+import TrendingTopMovies from "./components/TrendingTopMovies";
 
 function HomePage({
   searchParams,
@@ -12,7 +13,10 @@ function HomePage({
   return (
     <div>
       HomePage
-      <TrendingMovies page={page} />
+      <div className="flex gap-4">
+        <TrendingMovies page={page} />
+        <TrendingTopMovies />
+      </div>
     </div>
   );
 }

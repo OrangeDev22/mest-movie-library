@@ -25,4 +25,9 @@ export class MoviesResolver {
   getSimilarMovies(@Args('id', { type: () => ID }) id: number) {
     return this.moviesService.getSimilarMovies(id);
   }
+
+  @Query(() => [MovieType], { name: 'getTopTrendingMovies' })
+  getTopTrendingMovies() {
+    return this.moviesService.getTopTrendingMovies();
+  }
 }

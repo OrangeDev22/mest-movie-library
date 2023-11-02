@@ -1,4 +1,4 @@
-query Query($page: Float!) {
+query GetTrendingMovies($page: Float!) {
   getTrendingMovies(page: $page) {
     id
     adult

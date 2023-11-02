@@ -31,4 +31,5 @@ type Query {
   getTrendingMovies(page: Float!): [MovieType!]!
   getOneMmovie(id: ID!): MovieType!
   getSimilarMovies(id: ID!): [MovieType!]!
+  getTopTrendingMovies: [MovieType!]!
 }

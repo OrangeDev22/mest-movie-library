@@ -5,39 +5,14 @@ import MovieCard from "./MovieCard";
 import { getClient } from "../../../lib/graphql-client";
 import Link from "next/link";
 import MovieCardSkeleton from "./MovieCardSkeleton";
-
-const GetTrendingMovies = gql`
-  query Query($page: Float!) {
-    getTrendingMovies(page: $page) {
-      id
-      adult
-      backdrop_path
-      title
-      original_language
-      original_title
-      overview
-      poster_path
-      media_type
-      genre_ids
-      genres {
-        id
-        name
-      }
-      popularity
-      release_date
-      video
-      vote_average
-      vote_count
-    }
-  }
-`;
+import { GetTrendingMoviesDocument } from "@/__generated__/graphql";
 
 interface Props {
   page: number;
 }
 
 function TrendingMovies({ page }: Props) {
-  const { data, loading } = useQuery(GetTrendingMovies, {
+  const { data, loading } = useQuery(GetTrendingMoviesDocument, {
     variables: {
       page,
     },
@@ -76,8 +51,8 @@ function TrendingMovies({ page }: Props) {
 
       <div className="grid md:grid-cols-3 gap-4 items-center justify-items-center w-full h-full">
         {!loading &&
-          data.getTrendingMovies &&
-          data.getTrendingMovies.map((movie: any) => (
+          data?.getTrendingMovies &&
+          data.getTrendingMovies.map((movie) => (
             <div className="w-full h-full">
               <MovieCard
                 image={movie.poster_path}

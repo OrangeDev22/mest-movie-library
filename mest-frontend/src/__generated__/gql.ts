@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "query Query($page: Float!) {\n  getTrendingMovies(page: $page) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    genres {\n      id\n      name\n    }\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}": types.QueryDocument,
+    "query GetTopTrendingMovies {\n  getTopTrendingMovies {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    genres {\n      id\n      name\n    }\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}": types.GetTopTrendingMoviesDocument,
+    "query GetTrendingMovies($page: Float!) {\n  getTrendingMovies(page: $page) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    genres {\n      id\n      name\n    }\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}": types.GetTrendingMoviesDocument,
 };
 
 /**
@@ -33,7 +34,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query Query($page: Float!) {\n  getTrendingMovies(page: $page) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    genres {\n      id\n      name\n    }\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}"): (typeof documents)["query Query($page: Float!) {\n  getTrendingMovies(page: $page) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    genres {\n      id\n      name\n    }\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}"];
+export function graphql(source: "query GetTopTrendingMovies {\n  getTopTrendingMovies {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    genres {\n      id\n      name\n    }\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}"): (typeof documents)["query GetTopTrendingMovies {\n  getTopTrendingMovies {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    genres {\n      id\n      name\n    }\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetTrendingMovies($page: Float!) {\n  getTrendingMovies(page: $page) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    genres {\n      id\n      name\n    }\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}"): (typeof documents)["query GetTrendingMovies($page: Float!) {\n  getTrendingMovies(page: $page) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    genres {\n      id\n      name\n    }\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

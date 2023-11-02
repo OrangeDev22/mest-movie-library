@@ -104,7 +104,6 @@ export class MoviesService {
     return this.remapDataWithImages(data);
   }
 
-  //https://api.themoviedb.org/3/movie/popular?language=en-US&page=1
   async getTrendingMovies(page: number): Promise<MovieType[]> {
     const data = await firstValueFrom(
       this.httpService
@@ -130,7 +129,30 @@ export class MoviesService {
     );
     return this.remapDataWithImages(data);
   }
-
+  //"https://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key={api_key}"
+  // https://api.themoviedb.org/3
+  async getTopTrendingMovies() {
+    const data = await firstValueFrom(
+      this.httpService
+        .get(`${this.endpoint}/trending/movie/day?sort_by=vote_average.desc`, {
+          headers: {
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+        })
+        .pipe(
+          map((response) => {
+            return response.data.results as MovieType[];
+          }),
+          catchError((error) => {
+            console.log('--error', error.message);
+            return throwError(
+              () => new HttpException(JSON.stringify(error.message), 400),
+            );
+          }),
+        ),
+    );
+    return this.remapDataWithImages(data);
+  }
   // curl --request GET \
   //    --url 'https://api.themoviedb.org/3/trending/movie/day?language=en-US' \
   //    --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MDZmY2ViZjIzYTgxMjY2OWJiY2M4Y2ZmYjhkZjk5MyIsInN1YiI6IjY1MzA5ZDE2NTFhNjRlMDBjOGZkOWJlYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.59Fsd9dZdPtm32n27ndEzhrKtMAUfbyFqXPHVmsjutI' \
