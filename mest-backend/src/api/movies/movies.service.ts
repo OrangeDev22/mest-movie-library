@@ -11,22 +11,27 @@ export class MoviesService {
 
   constructor(private readonly httpService: HttpService) {}
 
-  validateMovie = (data: MovieType) => {
+  validateMovie = (data: MovieType, imageSize?: number) => {
     return {
       ...data,
       poster_path: data.poster_path
-        ? `${this.imageEndpoint}/w300${data.poster_path}`
+        ? `${this.imageEndpoint}/${imageSize ? `w${imageSize}` : 'w300'}${
+            data.poster_path
+          }`
         : '',
       media_type: data.media_type || '',
       backdrop_path: data.backdrop_path
-        ? `${this.imageEndpoint}/w300${data.backdrop_path}`
+        ? `${this.imageEndpoint}/${imageSize ? imageSize : 'w300'}${
+            data.backdrop_path
+          }`
         : '',
     };
   };
 
-  remapDataWithImages = (data: MovieType[]) => {
+  remapDataWithImages = (data: MovieType[], imageSize?: number) => {
+    console.log('--image size', imageSize);
     return data.map((movie) => {
-      return this.validateMovie(movie);
+      return this.validateMovie(movie, imageSize);
     });
   };
 
@@ -129,8 +134,7 @@ export class MoviesService {
     );
     return this.remapDataWithImages(data);
   }
-  //"https://api.themoviedb.org/3/discover/movie?sort_by=vote_average.desc&api_key={api_key}"
-  // https://api.themoviedb.org/3
+
   async getTopTrendingMovies() {
     const data = await firstValueFrom(
       this.httpService
@@ -151,7 +155,8 @@ export class MoviesService {
           }),
         ),
     );
-    return this.remapDataWithImages(data);
+    console.log('--length', this.remapDataWithImages(data, 200).length);
+    return this.remapDataWithImages(data, 200).slice(0, 10);
   }
   // curl --request GET \
   //    --url 'https://api.themoviedb.org/3/trending/movie/day?language=en-US' \

@@ -14,7 +14,9 @@ function HomePage({
     <div>
       HomePage
       <div className="flex gap-4">
-        <TrendingMovies page={page} />
+        <div className="flex-grow">
+          <TrendingMovies page={page} />
+        </div>
         <TrendingTopMovies />
       </div>
     </div>
