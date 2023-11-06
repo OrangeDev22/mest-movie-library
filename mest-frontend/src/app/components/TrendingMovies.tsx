@@ -55,6 +55,7 @@ function TrendingMovies({ page }: Props) {
           data.getTrendingMovies.map((movie) => (
             <div className="w-full h-full">
               <MovieCard
+                id={movie.id}
                 image={movie.poster_path}
                 title={movie.title}
                 key={movie.id}

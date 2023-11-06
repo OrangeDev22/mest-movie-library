@@ -1,6 +1,7 @@
 import { Args, ID, Int, Query, Resolver } from '@nestjs/graphql';
 import { MoviesService } from './movies.service';
 import { MovieType } from './entities/movie.entity';
+import { MovieClip } from './entities/movieClip.entity';
 
 @Resolver()
 export class MoviesResolver {
@@ -29,5 +30,9 @@ export class MoviesResolver {
   @Query(() => [MovieType], { name: 'getTopTrendingMovies' })
   getTopTrendingMovies() {
     return this.moviesService.getTopTrendingMovies();
+  }
+  @Query(() => [MovieClip], { name: 'getMovieClips' })
+  getMovieClips(@Args('id', { type: () => ID }) id: number) {
+    return this.moviesService.getMovieCLip(id);
   }
 }

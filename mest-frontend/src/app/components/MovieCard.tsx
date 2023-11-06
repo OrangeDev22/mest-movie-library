@@ -1,14 +1,19 @@
 import React from "react";
 import { upperFirst } from "lodash";
+import Link from "next/link";
 
 interface Props {
+  id: string;
   image: string;
   title: string;
 }
 
-function MovieCard({ image, title }: Props) {
+function MovieCard({ image, title, id }: Props) {
   return (
-    <div className="card card-compact max-w-xs bg-base-100 shadow-xl aspect-[9/14] mx-auto">
+    <Link
+      href={`/movie/${id}`}
+      className="card card-compact max-w-xs bg-base-100 shadow-xl aspect-[9/14] mx-auto"
+    >
       <div className="rounded-lg">
         <figure>
           <img src={image} alt="movie_title" className="w-full h-full" />
@@ -17,7 +22,7 @@ function MovieCard({ image, title }: Props) {
           <h2 className="card-title">{upperFirst(title)}</h2>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

@@ -2,6 +2,7 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { MovieType } from './entities/movie.entity';
 import { catchError, firstValueFrom, map, throwError } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
+import { MovieClip } from './entities/movieClip.entity';
 
 @Injectable()
 export class MoviesService {
@@ -155,11 +156,29 @@ export class MoviesService {
           }),
         ),
     );
-    console.log('--length', this.remapDataWithImages(data, 200).length);
     return this.remapDataWithImages(data, 200).slice(0, 10);
   }
-  // curl --request GET \
-  //    --url 'https://api.themoviedb.org/3/trending/movie/day?language=en-US' \
-  //    --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MDZmY2ViZjIzYTgxMjY2OWJiY2M4Y2ZmYjhkZjk5MyIsInN1YiI6IjY1MzA5ZDE2NTFhNjRlMDBjOGZkOWJlYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.59Fsd9dZdPtm32n27ndEzhrKtMAUfbyFqXPHVmsjutI' \
-  //    --header 'accept: application/json'
+  //https://api.themoviedb.org/3/movie/{movie_id}/videos
+  async getMovieCLip(id: number) {
+    const data = await firstValueFrom(
+      this.httpService
+        .get(`${this.endpoint}/movie/${id}/videos`, {
+          headers: {
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+        })
+        .pipe(
+          map((response) => {
+            return response.data.results as MovieClip[];
+          }),
+          catchError((error) => {
+            return throwError(
+              () => new HttpException(JSON.stringify(error.message), 400),
+            );
+          }),
+        ),
+    );
+    // console.log('--length', this.remapDataWithImages(data, 200).length);
+    return data.filter(({ site }) => site !== 'Youtube');
+  }
 }
