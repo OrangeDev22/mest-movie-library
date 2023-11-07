@@ -3,6 +3,8 @@ import { MovieType } from './entities/movie.entity';
 import { catchError, firstValueFrom, map, throwError } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { MovieClip } from './entities/movieClip.entity';
+import { CastMember } from './entities/castMember';
+import { MovieResponseType } from './entities/movie.response';
 
 @Injectable()
 export class MoviesService {
@@ -12,7 +14,10 @@ export class MoviesService {
 
   constructor(private readonly httpService: HttpService) {}
 
-  validateMovie = (data: MovieType, imageSize?: number) => {
+  validateMovie<T extends MovieType | MovieResponseType>(
+    data: T,
+    imageSize?: number,
+  ): T {
     return {
       ...data,
       poster_path: data.poster_path
@@ -27,16 +32,15 @@ export class MoviesService {
           }`
         : '',
     };
-  };
+  }
 
   remapDataWithImages = (data: MovieType[], imageSize?: number) => {
-    console.log('--image size', imageSize);
     return data.map((movie) => {
       return this.validateMovie(movie, imageSize);
     });
   };
 
-  async getOneMovie(id: number): Promise<MovieType> {
+  async getOneMovie(id: number): Promise<MovieResponseType> {
     console.log('--value', this.endpoint);
     const data = await firstValueFrom(
       this.httpService
@@ -47,10 +51,9 @@ export class MoviesService {
         })
         .pipe(
           map((response) => {
-            return response.data as MovieType;
+            return response.data as MovieResponseType;
           }),
           catchError((error) => {
-            console.log('--error', error.message);
             return throwError(
               () => new HttpException(JSON.stringify(error.message), 400),
             );
@@ -158,7 +161,30 @@ export class MoviesService {
     );
     return this.remapDataWithImages(data, 200).slice(0, 10);
   }
-  //https://api.themoviedb.org/3/movie/{movie_id}/videos
+
+  async getMovieCast(id: number) {
+    const data = await firstValueFrom(
+      this.httpService
+        .get(`${this.endpoint}/movie/${id}/credits`, {
+          headers: {
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+        })
+        .pipe(
+          map((response) => {
+            console.log(JSON.stringify(response.data.cast));
+            return response.data.cast;
+          }),
+          catchError((error) => {
+            return throwError(
+              () => new HttpException(JSON.stringify(error.message), 400),
+            );
+          }),
+        ),
+    );
+    return data.slice(0, 10);
+  }
+
   async getMovieCLip(id: number) {
     const data = await firstValueFrom(
       this.httpService
@@ -178,7 +204,6 @@ export class MoviesService {
           }),
         ),
     );
-    // console.log('--length', this.remapDataWithImages(data, 200).length);
     return data.filter(({ site }) => site !== 'Youtube');
   }
 }

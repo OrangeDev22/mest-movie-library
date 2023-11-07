@@ -10,10 +10,6 @@ query GetTopTrendingMovies {
     poster_path
     media_type
     genre_ids
-    genres {
-      id
-      name
-    }
     popularity
     release_date
     video
