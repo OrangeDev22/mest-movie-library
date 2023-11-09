@@ -11,6 +11,7 @@ async function Movie({ params }: { params: { id: string } }) {
 
   const {
     getOneMmovie: {
+      id,
       title,
       poster_path,
       overview,
@@ -18,6 +19,7 @@ async function Movie({ params }: { params: { id: string } }) {
       genres,
       vote_average,
       release_date,
+      production_companies,
     },
   } = data;
 
@@ -29,6 +31,7 @@ async function Movie({ params }: { params: { id: string } }) {
   return (
     <div>
       <MovieDetailsCard
+        id={id}
         title={title}
         image={poster_path}
         details={overview}
@@ -40,6 +43,7 @@ async function Movie({ params }: { params: { id: string } }) {
         }
         score={vote_average}
         released={release_date}
+        studio={production_companies ? production_companies[0].name : ""}
       />
     </div>
   );

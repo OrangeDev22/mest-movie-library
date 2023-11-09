@@ -12,6 +12,7 @@
   "dependencies": {
     "@apollo/client": "^3.8.6",
     "@apollo/experimental-nextjs-app-support": "^0.4.3",
+    "dayjs": "^1.11.10",
     "graphql": "16.8.1",
     "graphql-request": "6.1.0",
     "lodash": "^4.17.21",

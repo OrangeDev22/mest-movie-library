@@ -10,14 +10,18 @@ query GetOneMmovie($getOneMmovieId: ID!) {
     poster_path
     media_type
     genre_ids
-    genres {
-      id
-      name
-    }
     popularity
     release_date
     video
     vote_average
     vote_count
+    production_companies {
+      id
+      name
+    }
+    genres {
+      id
+      name
+    }
   }
 }
