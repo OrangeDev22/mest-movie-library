@@ -1,3 +1,4 @@
+"use client";
 import dayjs from "dayjs";
 import React from "react";
 
@@ -19,6 +20,7 @@ interface Props {
 }
 
 function MovieDetailsCard({
+  id,
   image,
   title,
   details,
@@ -31,18 +33,18 @@ function MovieDetailsCard({
   const filledStars = Math.floor(score / 2);
 
   return (
-    <div className="flex gap-4 m-2 px-2 py-4">
+    <div className="flex gap-8 mx-auto my-4 px-8 py-4 w-full max-w-7xl">
       <img
         src={image}
         alt={`${title}_poster`}
         className="max-w-[10rem] h-48 rounded-lg"
       />
 
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row w-full gap-8">
         <div className="space-y-4 w-3/4">
           <h2 className="text-2xl font-bold">{title}</h2>
           <div>{originalTitle}</div>
-          <p className="text-sm">{details}</p>
+          <p className="text-sm break-words">{details}</p>
           <div className="text-neutral-500">
             {`Genres:`}
             {genres.map((genre, index) => (

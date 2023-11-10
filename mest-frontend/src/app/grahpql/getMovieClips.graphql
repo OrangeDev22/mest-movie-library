@@ -1,8 +1,6 @@
 query GetMovieClips($getMovieClipsId: ID!) {
   getMovieClips(id: $getMovieClipsId) {
     id
-    iso_639_1
-    iso_3166_1
     name
     key
     site

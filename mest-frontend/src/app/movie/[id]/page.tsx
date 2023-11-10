@@ -2,6 +2,7 @@ import React from "react";
 import { getClient } from "../../../../lib/graphql-client";
 import { GetOneMmovieDocument } from "@/__generated__/graphql";
 import MovieDetailsCard from "@/app/components/MovieDetailsCard";
+import MovieClip from "@/app/components/MovieClip";
 
 async function Movie({ params }: { params: { id: string } }) {
   const { data, loading } = await getClient().query({
@@ -30,6 +31,7 @@ async function Movie({ params }: { params: { id: string } }) {
   console.log("--data", data);
   return (
     <div>
+      <MovieClip id={id} />
       <MovieDetailsCard
         id={id}
         title={title}

@@ -1,5 +1,5 @@
 "use client";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import React from "react";
 import MovieCard from "./MovieCard";
 import { getClient } from "../../../lib/graphql-client";
