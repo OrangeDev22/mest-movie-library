@@ -29,6 +29,6 @@ export class MovieClip {
   @Field(() => Boolean)
   official: boolean;
 
-  @Field(() => Date, { nullable: true })
-  published_at?: Date;
+  @Field(() => String, { nullable: true })
+  published_at?: String;
 }

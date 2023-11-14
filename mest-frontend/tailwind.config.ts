@@ -21,7 +21,11 @@ const config: Config = {
         "9/4": "9/4",
       },
       maxWidth: {
+        "36": "9rem",
         "40": "10rem",
+      },
+      maxHeight: {
+        "128": "40rem",
       },
     },
   },

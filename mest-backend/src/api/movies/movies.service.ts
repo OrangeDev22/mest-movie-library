@@ -73,7 +73,6 @@ export class MoviesService {
         })
         .pipe(
           map((response) => {
-            // console.log('--data', response.data);
             return response.data.results as MovieType[];
           }),
           catchError((error) => {

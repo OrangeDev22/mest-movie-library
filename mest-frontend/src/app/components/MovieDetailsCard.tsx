@@ -33,7 +33,7 @@ function MovieDetailsCard({
   const filledStars = Math.floor(score / 2);
 
   return (
-    <div className="flex gap-8 mx-auto my-4 px-8 py-4 w-full max-w-7xl">
+    <div className="flex gap-8 mx-auto my-4 px-8 py-4 w-full max-w-screen-2xl">
       <img
         src={image}
         alt={`${title}_poster`}

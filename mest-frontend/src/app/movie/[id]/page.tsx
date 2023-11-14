@@ -4,11 +4,24 @@ import { GetOneMmovieDocument } from "@/__generated__/graphql";
 import MovieDetailsCard from "@/app/components/MovieDetailsCard";
 import MovieClip from "@/app/components/MovieClip";
 
-async function Movie({ params }: { params: { id: string } }) {
+async function Movie({
+  params,
+  searchParams,
+}: {
+  params: {
+    id: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const { data, loading } = await getClient().query({
     query: GetOneMmovieDocument,
     variables: { getOneMmovieId: params.id },
   });
+
+  const selectedClip =
+    typeof searchParams.selectedClip === "string"
+      ? searchParams.selectedClip
+      : "";
 
   const {
     getOneMmovie: {
@@ -28,10 +41,9 @@ async function Movie({ params }: { params: { id: string } }) {
     return <div>Loading...</div>;
   }
 
-  console.log("--data", data);
   return (
     <div>
-      <MovieClip id={id} />
+      <MovieClip id={id} selectedClip={selectedClip} />
       <MovieDetailsCard
         id={id}
         title={title}
