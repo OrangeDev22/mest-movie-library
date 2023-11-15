@@ -3,6 +3,7 @@ import { getClient } from "../../../../lib/graphql-client";
 import { GetOneMmovieDocument } from "@/__generated__/graphql";
 import MovieDetailsCard from "@/app/components/MovieDetailsCard";
 import MovieClip from "@/app/components/MovieClip";
+import SimilarMovies from "@/app/components/SimilarMovies";
 
 async function Movie({
   params,
@@ -42,7 +43,7 @@ async function Movie({
   }
 
   return (
-    <div>
+    <div className="flex flex-col space-y-4">
       <MovieClip id={id} selectedClip={selectedClip} />
       <MovieDetailsCard
         id={id}
@@ -59,6 +60,7 @@ async function Movie({
         released={release_date}
         studio={production_companies ? production_companies[0].name : ""}
       />
+      <SimilarMovies movieId={id} />
     </div>
   );
 }

@@ -12,7 +12,6 @@ function VideoPLayer({ videoId }: { videoId: string }) {
     },
   };
 
-  console.log("--video id", videoId);
   return (
     <div className="w-full max-h-[40rem] bg-black aspect-video">
       <YouTube videoId={videoId} opts={opts} className="w-full h-full" />

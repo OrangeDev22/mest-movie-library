@@ -17,7 +17,6 @@ function TrendingMovies({ page }: Props) {
       page,
     },
   });
-  console.log("--loading", loading);
 
   return (
     <div className="space-y-5 flex flex-col">

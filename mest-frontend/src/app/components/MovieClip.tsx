@@ -26,10 +26,6 @@ async function MovieClip({
   }
 
   const { getMovieClips } = data;
-  console.log(
-    "--found it",
-    getMovieClips.find((clip) => clip.id === selectedClip)?.key
-  );
 
   return (
     <div className="max-w-screen-2xl mx-auto py-4 px-8 flex flex-col gap-4 w-full ">

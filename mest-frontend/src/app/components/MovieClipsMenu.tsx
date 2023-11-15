@@ -23,8 +23,6 @@ function MovieClipsMenu({
   clips: MovieClip[];
   movieId: string;
 }) {
-  console.log("--clips", clips.length);
-
   return (
     <div className="w-full bg-black overflow-y-auto">
       <div className="m-4 flex flex-col max-h-[40rem] md:max-h-full md:grid md:grid-cols-3 lg:grid-cols-4 gap-2">
