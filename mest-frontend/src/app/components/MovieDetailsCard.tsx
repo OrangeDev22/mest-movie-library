@@ -33,7 +33,7 @@ function MovieDetailsCard({
   const filledStars = Math.floor(score / 2);
 
   return (
-    <div className="flex gap-8 mx-auto my-4 px-8 py-4 w-full max-w-screen-2xl">
+    <div className="sm:flex gap-8 mx-auto my-4 px-8 py-4 w-full max-w-screen-2xl">
       <img
         src={image}
         alt={`${title}_poster`}
@@ -64,7 +64,7 @@ function MovieDetailsCard({
           </div>
         </div>
 
-        <div className="flex flex-col grow bg-neutral-200 h-20 rounded-lg p-2 space-y-1 text-center">
+        <div className="flex flex-col grow bg-neutral-200 h-20 rounded-lg p-2 space-y-1 text-center w-full md:max-w-xs self-center">
           <div className="font-bold text-violet-500">Score: {score} / 10</div>
 
           <div className="flex items-center space-x-1 bg-black p-1 rounded-lg justify-center">

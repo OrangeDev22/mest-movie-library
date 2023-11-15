@@ -12,7 +12,7 @@ function SimilarMovies({ movieId }: { movieId: string }) {
 
   if (loading) {
     return (
-      <div className="grid md:grid-cols-3 gap-4 items-center justify-items-center w-full h-full">
+      <div className="grid md:grid-cols-3 gap-4 items-center justify-items-center w-full h-full px-4 md:p-0">
         {loading &&
           !data &&
           new Array(20).fill(null).map(() => {
@@ -29,7 +29,7 @@ function SimilarMovies({ movieId }: { movieId: string }) {
   return (
     <div className="mx-auto w-full max-w-screen-2xl">
       <h2 className="text-2xl font-bold mb-4 px-8">Similar Movies</h2>
-      <div className="grid md:grid-cols-3 gap-4 items-center justify-items-center w-full h-full">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 items-center justify-items-center w-full h-full px-8">
         {!loading &&
           data?.getSimilarMovies &&
           data.getSimilarMovies.map((movie) => (
