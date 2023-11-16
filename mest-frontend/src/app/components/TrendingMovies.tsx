@@ -5,7 +5,9 @@ import MovieCard from "./MovieCard";
 import { getClient } from "../../../lib/graphql-client";
 import Link from "next/link";
 import MovieCardSkeleton from "./MovieCardSkeleton";
-import { GetTrendingMoviesDocument } from "@/__generated__/graphql";
+import { GetTrendingMoviesDocument, MovieType } from "@/__generated__/graphql";
+import Movie from "../movie/[id]/page";
+import MovieList from "./MovieList";
 
 interface Props {
   page: number;
@@ -47,30 +49,11 @@ function TrendingMovies({ page }: Props) {
           »
         </Link>
       </div>
-
-      <div className="grid md:grid-cols-3 gap-4 items-center justify-items-center w-full h-full">
-        {!loading &&
-          data?.getTrendingMovies &&
-          data.getTrendingMovies.map((movie) => (
-            <div className="w-full h-full">
-              <MovieCard
-                id={movie.id}
-                image={movie.poster_path}
-                title={movie.title}
-                key={movie.id}
-              />
-            </div>
-          ))}
-        {loading &&
-          !data &&
-          new Array(20).fill(null).map(() => {
-            return (
-              <div className="w-full h-full">
-                <MovieCardSkeleton />
-              </div>
-            );
-          })}
-      </div>
+      <MovieList
+        data={data?.getTrendingMovies as MovieType[]}
+        loading={loading}
+        rootClassName="grid md:grid-cols-3 gap-4 items-center justify-items-center w-full h-full"
+      />
     </div>
   );
 }
