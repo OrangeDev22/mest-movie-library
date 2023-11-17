@@ -18,6 +18,7 @@ const documents = {
     "query GetSimilarMovies($getSimilarMoviesId: ID!) {\n  getSimilarMovies(id: $getSimilarMoviesId) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}": types.GetSimilarMoviesDocument,
     "query GetTopTrendingMovies {\n  getTopTrendingMovies {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}": types.GetTopTrendingMoviesDocument,
     "query GetTrendingMovies($page: Float!) {\n  getTrendingMovies(page: $page) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}": types.GetTrendingMoviesDocument,
+    "query SearchMovie($search: String!) {\n  searchMovie(search: $search) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}": types.SearchMovieDocument,
 };
 
 /**
@@ -54,6 +55,10 @@ export function graphql(source: "query GetTopTrendingMovies {\n  getTopTrendingM
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query GetTrendingMovies($page: Float!) {\n  getTrendingMovies(page: $page) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}"): (typeof documents)["query GetTrendingMovies($page: Float!) {\n  getTrendingMovies(page: $page) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query SearchMovie($search: String!) {\n  searchMovie(search: $search) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}"): (typeof documents)["query SearchMovie($search: String!) {\n  searchMovie(search: $search) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

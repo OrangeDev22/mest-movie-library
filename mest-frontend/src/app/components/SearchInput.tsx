@@ -1,16 +1,22 @@
 "use client";
+import { SearchMovieDocument } from "@/__generated__/graphql";
+import { useQuery } from "@apollo/client";
 import { debounce } from "lodash";
 import React, { useState } from "react";
 
 function SearchInput() {
+  const [searchValue, setSearchValue] = useState("");
+  const { data, refetch } = useQuery(SearchMovieDocument, {
+    variables: { search: searchValue },
+  });
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleInputChange = (value: string) => {
-    // Perform your search or other logic here
-    console.log("Input changed:", value);
+  const handleInputChange = async (value: string) => {
+    if (value) await refetch({ search: value });
   };
 
   const debouncedHandleInputChange = debounce(handleInputChange, 500);
+  console.log("--data", data);
 
   return (
     <div
@@ -31,7 +37,18 @@ function SearchInput() {
           isFocused ? "" : "hidden"
         }`}
       >
-        <div className="py-2 px-4">Movies</div>
+        <div>
+          <div className="py-2 px-4">Movies</div>
+          {data && data.searchMovie.length > 0 && (
+            <div className="w-full mt-1 py-3 max-h-96 overflow-y-auto">
+              {data?.searchMovie.map(({ id, title }) => (
+                <div key={id} className="px-4">
+                  {title}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
