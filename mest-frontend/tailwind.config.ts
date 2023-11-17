@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        "dark-silver": "#171717",
+        navbar: "1C1C1C",
+        "background-primary": "#0e0e0e",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
