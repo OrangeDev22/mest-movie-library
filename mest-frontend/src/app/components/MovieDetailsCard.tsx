@@ -65,7 +65,9 @@ function MovieDetailsCard({
         </div>
 
         <div className="flex flex-col grow bg-neutral-200 h-20 rounded-lg p-2 space-y-1 text-center w-full md:max-w-xs self-center">
-          <div className="font-bold text-violet-500">Score: {score} / 10</div>
+          <div className="font-bold text-violet-500">
+            Score: {score.toFixed(2)} / 10
+          </div>
 
           <div className="flex items-center space-x-1 bg-black p-1 rounded-lg justify-center">
             {new Array(5).fill(null).map((_, index) => (

@@ -21,7 +21,7 @@ async function TrendingTopMovies() {
           >
             <h4 className="font-bold self-center text-2xl ml-4">{i + 1}</h4>
             <figure>
-              <img src={poster_path} alt="movie_title" className="w-16 h-20" />
+              <img src={poster_path} alt="movie_poster" className="w-16 h-20" />
             </figure>
             <div className="flex-1 truncate">{title}</div>
           </Link>

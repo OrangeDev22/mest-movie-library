@@ -29,7 +29,7 @@ function MovieClipsMenu({
         {clips.map((clip, index) => {
           return (
             <Link
-              href={`/movie/${movieId}?selectedClip+=${clip.id}`}
+              href={`/movie/${movieId}?selectedClip=${clip.id}`}
               key={clip.id}
               className={`break-words ${
                 index % 2 === 0 ? "bg-neutral-800" : "bg-neutral-900"
