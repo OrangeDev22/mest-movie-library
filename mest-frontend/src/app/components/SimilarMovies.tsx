@@ -2,8 +2,6 @@
 import { GetSimilarMoviesDocument, MovieType } from "@/__generated__/graphql";
 import { useQuery } from "@apollo/client";
 import React from "react";
-import MovieCardSkeleton from "./MovieCardSkeleton";
-import MovieCard from "./MovieCard";
 import MovieList from "./MovieList";
 
 function SimilarMovies({ movieId }: { movieId: string }) {

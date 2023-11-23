@@ -17,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="bg-background-primary text-white ">
+    <html lang="en" className="h-full">
+      <body className="bg-background-primary text-white min-h-full">
         <ApolloWrapper>
           <Providers>
             <Navbar />
