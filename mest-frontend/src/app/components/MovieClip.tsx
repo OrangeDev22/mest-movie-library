@@ -33,7 +33,9 @@ async function MovieClip({
         <VideoPLayer
           videoId={
             getMovieClips.find((clip) => clip.id === selectedClip)?.key ||
-            getMovieClips[0].key
+            getMovieClips.length > 0
+              ? getMovieClips[0].key
+              : ""
           }
         />
       </div>

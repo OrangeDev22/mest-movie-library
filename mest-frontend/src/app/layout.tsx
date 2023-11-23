@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-neutral-800 text-white ">
+      <body className="bg-background-primary text-white ">
         <ApolloWrapper>
           <Providers>
             <Navbar />

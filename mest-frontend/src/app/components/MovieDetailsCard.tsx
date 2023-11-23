@@ -34,11 +34,15 @@ function MovieDetailsCard({
 
   return (
     <div className="sm:flex gap-8 mx-auto my-4 px-8 py-4 w-full max-w-screen-2xl">
-      <img
-        src={image}
-        alt={`${title}_poster`}
-        className="max-w-[10rem] h-48 rounded-lg"
-      />
+      <div
+        className={`max-w-[10rem] h-60 rounded-lg w-full overflow-hidden ${
+          image ? "" : "bg-neutral-300 pb-4"
+        }`}
+      >
+        {image && (
+          <img src={image} className="h-full w-full" alt={`${title}_poster`} />
+        )}
+      </div>
 
       <div className="flex flex-col md:flex-row w-full gap-8">
         <div className="space-y-4 w-3/4">

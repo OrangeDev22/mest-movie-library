@@ -9,14 +9,21 @@ import React, { useState } from "react";
 function SearchInput() {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState("");
-  const { data, refetch } = useQuery(SearchMovieDocument, {
+  const [userHasSearched, setUserHasSearched] = useState(false);
+  const { data, refetch, previousData } = useQuery(SearchMovieDocument, {
     variables: { search: "" },
   });
   const [isFocused, setIsFocused] = useState(false);
 
   const handleInputChange = async (value: string) => {
     setSearchValue(value);
+    if (!userHasSearched) setUserHasSearched(true);
     if (value) await refetch({ search: value });
+  };
+
+  const handleClose = () => {
+    setUserHasSearched(false);
+    setIsFocused(false);
   };
 
   const debouncedHandleInputChange = debounce(handleInputChange, 500);
@@ -25,9 +32,8 @@ function SearchInput() {
     <div
       className="w-full bg-dark-silver p-2 rounded-lg max-w-xl relative"
       onClick={() => setIsFocused(true)}
-      onBlur={(e) => {
-        console.log("BLUR");
-        setIsFocused(false);
+      onBlur={() => {
+        handleClose();
       }}
     >
       <input
@@ -42,7 +48,7 @@ function SearchInput() {
         }}
         onKeyUp={(e) => {
           if (e.key === "Enter") {
-            setIsFocused(false);
+            handleClose();
           }
         }}
       />
@@ -58,6 +64,11 @@ function SearchInput() {
       >
         <div className="rounded-b-lg">
           <div className="py-2 px-4">Movies</div>
+
+          {userHasSearched && data?.searchMovie.length === 0 && (
+            <div className="px-4">No Result...</div>
+          )}
+
           {data && data.searchMovie.length > 0 && (
             <div className="w-full mt-1 py-3 max-h-96 overflow-y-auto">
               {data?.searchMovie.map(
@@ -69,7 +80,7 @@ function SearchInput() {
                     key={id}
                     onMouseDown={() => {
                       router.push(`/movie/${id}`);
-                      setIsFocused(false);
+                      handleClose();
                     }}
                   >
                     <img

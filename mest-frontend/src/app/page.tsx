@@ -12,11 +12,13 @@ function HomePage({
 
   return (
     <div className="bg-background-primary">
-      <div className="flex gap-4">
-        <div className="flex-grow">
+      <div className="flex gap-4 justify-evenly">
+        <div className="flex-grow my-4">
           <TrendingMovies page={page} />
         </div>
-        <TrendingTopMovies />
+        <div className="mr-4 mt-16">
+          <TrendingTopMovies />
+        </div>
       </div>
     </div>
   );

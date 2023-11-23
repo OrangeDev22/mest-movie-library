@@ -21,7 +21,7 @@ function TrendingMovies({ page }: Props) {
   });
 
   return (
-    <div className="space-y-5 flex flex-col">
+    <div className="space-y-5 flex flex-col max-w-5xl mx-auto">
       <h2 className="font-bold text-xl">Trending Movies</h2>
 
       <div className="join self-center">
@@ -52,7 +52,7 @@ function TrendingMovies({ page }: Props) {
       <MovieList
         data={data?.getTrendingMovies as MovieType[]}
         loading={loading}
-        rootClassName="grid md:grid-cols-3 gap-4 items-center justify-items-center w-full h-full"
+        rootClassName="grid md:grid-cols-3 gap-8 items-center justify-items-center w-full h-full"
       />
     </div>
   );

@@ -58,7 +58,11 @@ async function Movie({
         }
         score={vote_average}
         released={release_date}
-        studio={production_companies ? production_companies[0].name : ""}
+        studio={
+          production_companies && production_companies.length > 0
+            ? production_companies[0].name
+            : ""
+        }
       />
       <SimilarMovies movieId={id} />
     </div>

@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         "dark-silver": "#171717",
-        navbar: "1C1C1C",
+        navbar: "#1c1c1c",
         "background-primary": "#0e0e0e",
       },
       backgroundImage: {
@@ -28,6 +28,7 @@ const config: Config = {
       maxWidth: {
         "36": "9rem",
         "40": "10rem",
+        "2xs": "300px",
       },
       maxHeight: {
         "128": "40rem",
