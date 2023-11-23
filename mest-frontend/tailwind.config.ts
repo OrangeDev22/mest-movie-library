@@ -23,6 +23,7 @@ const config: Config = {
       },
       aspectRatio: {
         "9/14": "9 / 14",
+        "8/15": "8 / 15",
         "9/4": "9/4",
       },
       maxWidth: {

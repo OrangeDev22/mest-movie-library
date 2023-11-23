@@ -12,7 +12,7 @@ function MovieCard({ image, title, id }: Props) {
   return (
     <Link
       href={`/movie/${id}`}
-      className="card card-compact max-w-xs bg-base-100 shadow-xl aspect-[9/14] mx-auto"
+      className="card card-compact max-w-xs bg-base-100 shadow-xl mx-auto"
     >
       <div className="rounded-lg h-full flex flex-col">
         <figure className="w-full h-full bg-neutral-500">
