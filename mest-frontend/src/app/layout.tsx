@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/app/components/Navbar";
 import Providers from "./Providers";
 import { ApolloWrapper } from "./ApolloWrapper";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 const inter = Inter({ subsets: ["latin"] });
 inter.className;
 export const metadata: Metadata = {
@@ -21,8 +22,10 @@ export default function RootLayout({
       <body className="bg-background-primary text-white min-h-full">
         <ApolloWrapper>
           <Providers>
-            <Navbar />
-            {children}
+            <UserProvider>
+              <Navbar />
+              {children}
+            </UserProvider>
           </Providers>
         </ApolloWrapper>
       </body>

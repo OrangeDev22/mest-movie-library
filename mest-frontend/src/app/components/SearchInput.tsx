@@ -10,15 +10,16 @@ function SearchInput() {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState("");
   const [userHasSearched, setUserHasSearched] = useState(false);
-  const { data, refetch, previousData } = useQuery(SearchMovieDocument, {
+  const { data, refetch } = useQuery(SearchMovieDocument, {
     variables: { search: "" },
   });
   const [isFocused, setIsFocused] = useState(false);
+  const [userTyping, setUserTyping] = useState(false);
 
   const handleInputChange = async (value: string) => {
-    setSearchValue(value);
     if (!userHasSearched) setUserHasSearched(true);
-    if (value) await refetch({ search: value });
+    if (value !== undefined) await refetch({ search: value });
+    if (userTyping) setUserTyping(false);
   };
 
   const handleClose = () => {
@@ -40,7 +41,11 @@ function SearchInput() {
         type="text"
         placeholder="Search Movie..."
         className="w-full text-white bg-dark-silver outline-none"
-        onChange={(e) => debouncedHandleInputChange(e.target.value)}
+        onChange={(e) => {
+          setSearchValue(e.target.value);
+          if (!userTyping) setUserTyping(true);
+          debouncedHandleInputChange(e.target.value);
+        }}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             router.push(`/search?searchValue=${searchValue}`);
@@ -65,7 +70,7 @@ function SearchInput() {
         <div className="rounded-b-lg">
           <div className="py-2 px-4">Movies</div>
 
-          {userHasSearched && data?.searchMovie.length === 0 && (
+          {userHasSearched && data?.searchMovie.length === 0 && !userTyping && (
             <div className="px-4">No Result...</div>
           )}
 

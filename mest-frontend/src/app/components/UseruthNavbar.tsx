@@ -4,19 +4,20 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import SiginButton from "./SiginButton";
 import LogoutButton from "./LogoutButton";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 function UseruthNavbar() {
-  const { data: session } = useSession();
+  const { user, isLoading } = useUser();
+  if (isLoading) return null;
+
   return (
     <>
-      {session?.user ? (
+      {user ? (
         <div className="flex gap-x-2 items-center">
           <Link href="/dashboard">Dashboard</Link>
-          <p>
-            {session.user.name} {session.user.email}
-          </p>
+          <p>{user.name}</p>
           <img
-            src={session.user.image || ""}
+            src={user.picture || ""}
             alt=""
             className="w-10 h-10 rounded-full cursor-pointer"
           />

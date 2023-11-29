@@ -1,12 +1,8 @@
 "use client";
 import { useQuery } from "@apollo/client";
 import React from "react";
-import MovieCard from "./MovieCard";
-import { getClient } from "../../../lib/graphql-client";
 import Link from "next/link";
-import MovieCardSkeleton from "./MovieCardSkeleton";
 import { GetTrendingMoviesDocument, MovieType } from "@/__generated__/graphql";
-import Movie from "../movie/[id]/page";
 import MovieList from "./MovieList";
 
 interface Props {
