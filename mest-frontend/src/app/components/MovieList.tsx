@@ -27,6 +27,9 @@ function MovieList({
       </div>
     );
   }
+
+  if (!data) return null;
+
   return (
     <div className={rootClassName}>
       {data.map((movie) => (

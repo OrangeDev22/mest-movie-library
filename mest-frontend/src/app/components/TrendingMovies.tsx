@@ -10,11 +10,15 @@ interface Props {
 }
 
 function TrendingMovies({ page }: Props) {
-  const { data, loading } = useQuery(GetTrendingMoviesDocument, {
+  const { data, loading, error } = useQuery(GetTrendingMoviesDocument, {
     variables: {
       page,
     },
   });
+
+  if (error) {
+    return <div>Error</div>;
+  }
 
   return (
     <div className="space-y-5 flex flex-col max-w-5xl mx-auto">

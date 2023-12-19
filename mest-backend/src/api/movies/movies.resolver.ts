@@ -4,6 +4,8 @@ import { MovieType } from './entities/movie.entity';
 import { MovieClip } from './entities/movieClip.entity';
 import { CastMember } from './entities/castMember';
 import { MovieResponseType } from './entities/movie.response';
+import { UseGuards } from '@nestjs/common/decorators';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Resolver()
 export class MoviesResolver {
@@ -14,6 +16,8 @@ export class MoviesResolver {
     return this.moviesService.searchMovie(search);
   }
 
+  // Commented code for future references
+  // @UseGuards(AuthGuard)
   @Query(() => [MovieType], { name: 'getTrendingMovies' })
   getTrendingMovies(@Args('page', { type: () => Number }) page: number) {
     return this.moviesService.getTrendingMovies(page);
