@@ -1,62 +1,25 @@
-// "use client";
-// import React from "react";
-// import { useSession } from "next-auth/react";
-// import Link from "next/link";
-// import SiginButton from "./SiginButton";
-// import LogoutButton from "./LogoutButton";
-// import { useUser } from "@auth0/nextjs-auth0/client";
-
-// function UseruthNavbar() {
-//   const { user, isLoading } = useUser();
-//   if (isLoading) return null;
-
-//   return (
-//     <>
-//       {user ? (
-//         <div className="flex gap-x-2 items-center">
-//           <Link href="/dashboard">Dashboard</Link>
-//           <p>{user.name}</p>
-//           <img
-//             src={user.picture || ""}
-//             alt=""
-//             className="w-10 h-10 rounded-full cursor-pointer"
-//           />
-//           <LogoutButton />
-//         </div>
-//       ) : (
-//         <SiginButton />
-//       )}
-//     </>
-//   );
-// }
-
-// export default UseruthNavbar;
-
-"use client";
 import React from "react";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import SiginButton from "./SiginButton";
 import LogoutButton from "./LogoutButton";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import { useAuth0 } from "@auth0/auth0-react";
+import { getSession } from "@auth0/nextjs-auth0";
 
-function UseruthNavbar() {
-  const { user, isLoading } = useAuth0();
-
-  if (isLoading) return null;
+async function UserNavBarItems() {
+  const session = await getSession();
 
   return (
     <>
-      {user ? (
+      {session?.user ? (
         <div className="flex gap-x-2 items-center">
           <Link href="/dashboard">Dashboard</Link>
-          <p>{user.name}</p>
-          <img
-            src={user.picture || ""}
-            alt=""
-            className="w-10 h-10 rounded-full cursor-pointer"
-          />
+          <p>{session?.user.name}</p>
+          <Link href={"user/settings"}>
+            <img
+              src={session.user.picture || ""}
+              alt="user_profile_pic"
+              className="w-10 h-10 rounded-full cursor-pointer"
+            />
+          </Link>
           <LogoutButton />
         </div>
       ) : (
@@ -66,4 +29,4 @@ function UseruthNavbar() {
   );
 }
 
-export default UseruthNavbar;
+export default UserNavBarItems;

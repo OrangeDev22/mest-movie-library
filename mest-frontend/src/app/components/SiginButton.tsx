@@ -1,19 +1,12 @@
-// "use client";
-import React from "react";
-import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useAuth0 } from "@auth0/auth0-react";
+import React from "react";
 
 function SiginButton() {
-  const { loginWithRedirect } = useAuth0();
   return (
     <div className="flex gap-x-2 items-center">
-      <button
-        className="bg-sky-400 px-3 py-2 rounded"
-        onClick={() => loginWithRedirect()}
-      >
+      <Link className="bg-sky-400 px-3 py-2 rounded" href={"/api/auth/login"}>
         Sign in
-      </button>
+      </Link>
     </div>
   );
 }

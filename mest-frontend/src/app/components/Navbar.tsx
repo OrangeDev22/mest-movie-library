@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import UseruthNavbar from "./UseruthNavbar";
 import SearchInput from "./SearchInput";
+import UserNavBarItems from "./UseruthNavbar";
 
 function Navbar() {
   return (
@@ -11,7 +11,7 @@ function Navbar() {
       </Link>
       <SearchInput />
       <div className="flex w-full mx-auto justify-end gap-4">
-        <UseruthNavbar />
+        <UserNavBarItems />
       </div>
     </nav>
   );

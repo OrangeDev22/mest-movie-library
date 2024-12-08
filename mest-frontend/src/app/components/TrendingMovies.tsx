@@ -1,19 +1,24 @@
-"use client";
-import { useQuery } from "@apollo/client";
+// "use client";
+// import { useQuery } from "@apollo/client";
 import React from "react";
 import Link from "next/link";
 import { GetTrendingMoviesDocument, MovieType } from "@/__generated__/graphql";
 import MovieList from "./MovieList";
+import { getClient } from "@/lib/client";
 
 interface Props {
   page: number;
 }
 
-function TrendingMovies({ page }: Props) {
-  const { data, loading, error } = useQuery(GetTrendingMoviesDocument, {
-    variables: {
-      page,
-    },
+async function TrendingMovies({ page }: Props) {
+  // const { data, loading, error } = useQuery(GetTrendingMoviesDocument, {
+  //   variables: {
+  //     page,
+  //   },
+  // });
+  const { data, error, loading } = await getClient().query({
+    query: GetTrendingMoviesDocument,
+    variables: { page },
   });
 
   if (error) {

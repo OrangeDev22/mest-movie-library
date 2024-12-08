@@ -3,9 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/components/Navbar";
 import Providers from "./Providers";
-import { ApolloWrapper } from "./ApolloWrapper";
+import { ApolloWrapper } from "../lib/ApolloWrapper";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
-import Auth0Wrapper from "./Auth0Wrapper";
+// import Auth0Wrapper from "./Auth0Wrapper";
 const inter = Inter({ subsets: ["latin"] });
 inter.className;
 export const metadata: Metadata = {
@@ -22,14 +22,14 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className="bg-background-primary text-white min-h-full">
         {/* <UserProvider> */}
-        <Auth0Wrapper>
+        <UserProvider>
           <ApolloWrapper>
             <Providers>
               <Navbar />
               {children}
             </Providers>
           </ApolloWrapper>
-        </Auth0Wrapper>
+        </UserProvider>
         {/* </UserProvider> */}
       </body>
     </html>

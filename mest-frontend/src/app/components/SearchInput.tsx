@@ -2,7 +2,6 @@
 import { SearchMovieDocument } from "@/__generated__/graphql";
 import { useQuery } from "@apollo/client";
 import { debounce } from "lodash";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
