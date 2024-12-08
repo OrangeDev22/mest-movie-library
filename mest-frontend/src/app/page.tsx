@@ -16,7 +16,9 @@ function HomePage({
         <div className="flex-grow my-4">
           <TrendingMovies page={page} />
         </div>
-        <div className="mr-4">{/* <TrendingTopMovies /> */}</div>
+        <div className="mr-4">
+          <TrendingTopMovies />
+        </div>
       </div>
     </div>
   );
