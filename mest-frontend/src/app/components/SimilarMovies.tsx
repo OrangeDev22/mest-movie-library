@@ -16,7 +16,7 @@ function SimilarMovies({ movieId }: { movieId: string }) {
       <MovieList
         data={data?.getSimilarMovies as MovieType[]}
         loading={loading}
-        rootClassName="grid sm:grid-cols-2 md:grid-cols-3 gap-4 items-center justify-items-center w-full h-full px-8"
+        rootClassName="gap-4 px-8"
       />
     </div>
   );

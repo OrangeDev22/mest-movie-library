@@ -1,25 +1,22 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import SiginButton from "./SiginButton";
 import LogoutButton from "./LogoutButton";
-import { getSession } from "@auth0/nextjs-auth0";
+import UserPicture from "./UserPicture";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
-async function UserNavBarItems() {
-  const session = await getSession();
-  const user = session?.user;
-
+function UserNavBarItems() {
+  const { user } = useUser();
+  console.log("--user image", user?.picture);
   return (
     <>
       {user ? (
         <div className="flex gap-x-2 items-center">
           <Link href="/dashboard">Dashboard</Link>
-          <p>{user.name}</p>
-          <Link href={"user/settings"}>
-            <img
-              src={user.picture || ""}
-              alt="user_profile_pic"
-              className="w-10 h-10 rounded-full cursor-pointer"
-            />
+          {/* <p>{user.name}</p> */}
+          <Link href={"user/settings"} className="min-w-10 h-10">
+            <UserPicture />
           </Link>
           <LogoutButton />
         </div>

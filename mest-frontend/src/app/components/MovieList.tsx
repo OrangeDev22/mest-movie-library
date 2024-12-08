@@ -2,6 +2,7 @@ import { GetSimilarMoviesQuery, MovieType } from "@/__generated__/graphql";
 import React from "react";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 import MovieCard from "./MovieCard";
+import { twMerge } from "tailwind-merge";
 
 function MovieList({
   data,
@@ -10,7 +11,7 @@ function MovieList({
 }: {
   data: MovieType[];
   loading: boolean;
-  rootClassName: string;
+  rootClassName?: string;
 }) {
   if (loading) {
     return (
@@ -31,7 +32,12 @@ function MovieList({
   if (!data) return null;
 
   return (
-    <div className={rootClassName}>
+    <div
+      className={twMerge(
+        "grid sm:grid-cols-2 lg:grid-cols-3 items-center justify-items-center w-full h-full gap-8",
+        rootClassName
+      )}
+    >
       {data.map((movie) => (
         <div className="w-full h-full">
           <MovieCard

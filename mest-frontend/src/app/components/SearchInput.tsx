@@ -30,7 +30,7 @@ function SearchInput() {
 
   return (
     <div
-      className="w-full bg-dark-silver p-2 rounded-lg max-w-xl relative"
+      className="w-full bg-dark-silver p-2 rounded-lg relative"
       onClick={() => setIsFocused(true)}
       onBlur={() => {
         handleClose();

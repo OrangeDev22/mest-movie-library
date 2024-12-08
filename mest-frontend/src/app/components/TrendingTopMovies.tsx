@@ -17,7 +17,7 @@ async function TrendingTopMovies() {
         {data?.getTopTrendingMovies.map(({ title, poster_path, id }, i) => {
           return (
             <Link
-              className="rounded-lg overflow-hidden bg-base-100 max-w-xs flex gap-4 mx-2 items-center pr-4"
+              className="rounded-lg overflow-hidden bg-base-100 w-full md:max-w-xs flex gap-4 mx-2 items-center pr-4"
               key={id}
               href={`/movie/${id}`}
             >

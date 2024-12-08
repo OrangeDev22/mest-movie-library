@@ -65,11 +65,7 @@ function Search({
 
       {((slicedMovies && slicedMovies.length > 0) || loading) && (
         <>
-          <MovieList
-            data={slicedMovies as MovieType[]}
-            loading={loading}
-            rootClassName="grid md:grid-cols-3 gap-8 items-center justify-items-center w-full h-full"
-          />
+          <MovieList data={slicedMovies as MovieType[]} loading={loading} />
         </>
       )}
     </div>

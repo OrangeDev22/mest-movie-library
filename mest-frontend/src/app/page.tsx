@@ -11,12 +11,12 @@ function HomePage({
     typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
 
   return (
-    <div className="bg-background-primary">
-      <div className="flex gap-4 justify-evenly">
+    <div className="bg-background-primary p-10">
+      <div className="flex gap-4 justify-evenly flex-col md:flex-row">
         <div className="flex-grow my-4">
           <TrendingMovies page={page} />
         </div>
-        <div className="mr-4">
+        <div>
           <TrendingTopMovies />
         </div>
       </div>
