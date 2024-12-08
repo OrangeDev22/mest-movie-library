@@ -15,8 +15,8 @@ function UserNavBarItems() {
         <div className="flex gap-x-2 items-center">
           <Link href="/dashboard">Dashboard</Link>
           {/* <p>{user.name}</p> */}
-          <Link href={"user/settings"} className="min-w-10 h-10">
-            <UserPicture />
+          <Link href={"/user/settings"}>
+            <UserPicture size="sm" />
           </Link>
           <LogoutButton />
         </div>

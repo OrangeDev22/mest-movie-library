@@ -1,23 +1,40 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Image from "next/image";
 import { useState } from "react";
+import { twMerge } from "tailwind-merge";
 
-const UserPicture = () => {
+interface UserPictureProps {
+  className?: string;
+  size: "sm" | "md";
+}
+
+const UserPicture = ({ className, size = "md" }: UserPictureProps) => {
   const { user, isLoading } = useUser();
 
   if (isLoading)
     return (
-      <div className="rounded-full cursor-pointer w-full h-full bg-gray-400 animate-pulse bg-gray-300" />
+      <div
+        className={twMerge(
+          "rounded-full cursor-pointer w-full h-full bg-gray-400 animate-pulse bg-gray-300",
+          size === "md" ? "w-24 h-24" : "w-10 h-10",
+          className
+        )}
+      />
     );
 
   return (
-    <Image
-      src={user?.picture || "/default-avatar.png"}
-      alt="user_profile_pic"
-      className="rounded-full cursor-pointer w-full h-full"
-      width={0}
-      height={0}
-    />
+    <div className={size === "md" ? "w-24 h-24" : "w-10 h-10"}>
+      <Image
+        src={user?.picture || "/default-avatar.png"}
+        alt="user_profile_pic"
+        className={twMerge(
+          "rounded-full cursor-pointer w-full h-full",
+          className
+        )}
+        width={0}
+        height={0}
+      />
+    </div>
   );
 };
 
