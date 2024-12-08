@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import UserPicture from "@/app/components/UserPicture";
+import { twMerge } from "tailwind-merge";
 
-// Define the Zod schema for the form
 const userSettingsSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address").min(1, "Email is required"),
@@ -15,14 +15,17 @@ const userSettingsSchema = z.object({
 
 type UserSettingsFormData = z.infer<typeof userSettingsSchema>;
 
-const UserSettingsPage = () => {
-  const { user, isLoading } = useUser();
+const UserSettingsPage = ({
+  onFormSubmitCompleted,
+}: {
+  onFormSubmitCompleted: () => void;
+}) => {
+  const { user } = useUser();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    setValue,
+    formState: { errors, isSubmitting, isDirty },
   } = useForm<UserSettingsFormData>({
     resolver: zodResolver(userSettingsSchema),
     defaultValues: {
@@ -32,13 +35,28 @@ const UserSettingsPage = () => {
     },
   });
 
-  const onSubmit = (data: UserSettingsFormData) => {
-    console.log("Form data submitted:", data);
-  };
+  const onSubmit = async (data: UserSettingsFormData) => {
+    try {
+      const response = await fetch("/api/updateUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user?.sub,
+          ...data,
+        }),
+      });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+      if (response.ok) {
+        onFormSubmitCompleted();
+      } else {
+        console.error("Failed to update user");
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+    }
+  };
 
   return (
     <div className="p-6 max-w-3xl mx-auto bg-gray-800 text-white rounded-lg shadow-md">
@@ -102,7 +120,11 @@ const UserSettingsPage = () => {
           <div className="mt-6 text-center">
             <button
               type="submit"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg font-semibold"
+              className={twMerge(
+                "bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg font-semibold",
+                isSubmitting || !isDirty ? "opacity-50 cursor-not-allowed" : ""
+              )}
+              disabled={isSubmitting || !isDirty}
             >
               Save Changes
             </button>

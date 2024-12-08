@@ -6,13 +6,18 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { useState } from "react";
 
 const UserSettingsPage = () => {
-  const { user, isLoading } = useUser();
+  const { user, isLoading, checkSession } = useUser();
   const [openForm, setOpenForm] = useState(false);
 
   return (
     <div className="my-6">
       {openForm ? (
-        <UserFormSettings />
+        <UserFormSettings
+          onFormSubmitCompleted={async () => {
+            await checkSession();
+            setOpenForm(false);
+          }}
+        />
       ) : (
         <UserCard
           user={user}
