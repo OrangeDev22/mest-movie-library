@@ -12,6 +12,8 @@ const config: Config = {
         "dark-silver": "#171717",
         navbar: "#1c1c1c",
         "background-primary": "#0e0e0e",
+        primary: "#a855f7",
+        "primary-dark": "#7e22ce",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
