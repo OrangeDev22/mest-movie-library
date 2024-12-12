@@ -15,3 +15,12 @@ model Movie  {
   title String
   description String?
 }
+
+model User {
+  id        Int      @id @default(autoincrement())
+  nickName  String 
+  name      String   @db.VarChar(100)             
+  email     String   @unique                      
+  createdAt DateTime @default(now())              
+  updatedAt DateTime @updatedAt                   
+}

@@ -41,7 +41,6 @@ export class MoviesService {
   };
 
   async getOneMovie(id: number): Promise<MovieResponseType> {
-    console.log('--value', this.endpoint);
     const data = await firstValueFrom(
       this.httpService
         .get(`${this.endpoint}/movie/${id}?language=en-US`, {
