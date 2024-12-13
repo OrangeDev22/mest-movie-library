@@ -1,0 +1,10 @@
+query GetOneUser($id: Float!) {
+  getOneUser(id: $id) {
+    id
+    nickName
+    name
+    email
+    createdAt
+    updatedAt
+  }
+}

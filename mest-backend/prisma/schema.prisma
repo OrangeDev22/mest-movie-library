@@ -18,6 +18,7 @@ model Movie  {
 
 model User {
   id        Int      @id @default(autoincrement())
+  auth0Id   String?  @unique     
   nickName  String 
   name      String   @db.VarChar(100)             
   email     String   @unique                      

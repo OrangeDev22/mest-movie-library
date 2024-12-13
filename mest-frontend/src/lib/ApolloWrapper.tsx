@@ -7,18 +7,20 @@ import {
   NextSSRApolloClient,
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support/ssr";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
-export function ApolloWrapper({ children }: React.PropsWithChildren) {
-  const [token, setToken] = useState("");
-  const user = useUser();
-
+export function ApolloWrapper({
+  children,
+  accessToken,
+}: {
+  children: ReactNode;
+  accessToken: string;
+}) {
   const makeClient = () => {
     const httpLink = new HttpLink({
       uri: process.env.MEST_BACKEND_URL,
       headers: {
-        authorization: `Bearer ${token}`,
+        authorization: `Bearer ${accessToken}`,
       },
     });
 
@@ -35,23 +37,6 @@ export function ApolloWrapper({ children }: React.PropsWithChildren) {
           : httpLink,
     });
   };
-
-  // useEffect(() => {
-  //   const getAccessToken = async () => {
-  //     try {
-  //       const accessToken = await getAccessTokenSilently();
-  //       setToken(accessToken);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getAccessToken();
-  // }, [user]);
-
-  // if (isLoading && !token) return <div>Loading...</div>;
-
-  // if ((isAuthenticated && !token) || error)
-  //   return <div>Ops something went wrong</div>;
 
   return (
     <ApolloNextAppProvider makeClient={() => makeClient()}>

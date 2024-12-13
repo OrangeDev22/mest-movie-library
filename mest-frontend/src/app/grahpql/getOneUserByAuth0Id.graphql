@@ -1,0 +1,11 @@
+query GetOneByAuth0IdUser($authId: String!) {
+  getOneByAuth0IdUser(authId: $authId) {
+    auth0Id
+    id
+    nickName
+    name
+    email
+    createdAt
+    updatedAt
+  }
+}

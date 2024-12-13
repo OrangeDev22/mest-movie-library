@@ -13,12 +13,16 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "mutation CreateUser($createUserInput: CreateUserInput!) {\n  createUser(createUserInput: $createUserInput) {\n    auth0Id\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}": types.CreateUserDocument,
     "query GetMovieClips($getMovieClipsId: ID!) {\n  getMovieClips(id: $getMovieClipsId) {\n    id\n    name\n    key\n    site\n    size\n    type\n    official\n    published_at\n  }\n}": types.GetMovieClipsDocument,
     "query GetOneMmovie($getOneMmovieId: ID!) {\n  getOneMmovie(id: $getOneMmovieId) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n    production_companies {\n      id\n      name\n    }\n    genres {\n      id\n      name\n    }\n  }\n}": types.GetOneMmovieDocument,
+    "query GetOneUser($id: Float!) {\n  getOneUser(id: $id) {\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}": types.GetOneUserDocument,
+    "query GetOneByAuth0IdUser($authId: String!) {\n  getOneByAuth0IdUser(authId: $authId) {\n    auth0Id\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}": types.GetOneByAuth0IdUserDocument,
     "query GetSimilarMovies($getSimilarMoviesId: ID!) {\n  getSimilarMovies(id: $getSimilarMoviesId) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}": types.GetSimilarMoviesDocument,
     "query GetTopTrendingMovies {\n  getTopTrendingMovies {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}": types.GetTopTrendingMoviesDocument,
     "query GetTrendingMovies($page: Float!) {\n  getTrendingMovies(page: $page) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}": types.GetTrendingMoviesDocument,
     "query SearchMovie($search: String!) {\n  searchMovie(search: $search) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}": types.SearchMovieDocument,
+    "mutation UpdateUser($updateUserInput: UpdateUserInput!) {\n  updateUser(updateUserInput: $updateUserInput) {\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}": types.UpdateUserDocument,
 };
 
 /**
@@ -38,11 +42,23 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "mutation CreateUser($createUserInput: CreateUserInput!) {\n  createUser(createUserInput: $createUserInput) {\n    auth0Id\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}"): (typeof documents)["mutation CreateUser($createUserInput: CreateUserInput!) {\n  createUser(createUserInput: $createUserInput) {\n    auth0Id\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "query GetMovieClips($getMovieClipsId: ID!) {\n  getMovieClips(id: $getMovieClipsId) {\n    id\n    name\n    key\n    site\n    size\n    type\n    official\n    published_at\n  }\n}"): (typeof documents)["query GetMovieClips($getMovieClipsId: ID!) {\n  getMovieClips(id: $getMovieClipsId) {\n    id\n    name\n    key\n    site\n    size\n    type\n    official\n    published_at\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query GetOneMmovie($getOneMmovieId: ID!) {\n  getOneMmovie(id: $getOneMmovieId) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n    production_companies {\n      id\n      name\n    }\n    genres {\n      id\n      name\n    }\n  }\n}"): (typeof documents)["query GetOneMmovie($getOneMmovieId: ID!) {\n  getOneMmovie(id: $getOneMmovieId) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n    production_companies {\n      id\n      name\n    }\n    genres {\n      id\n      name\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetOneUser($id: Float!) {\n  getOneUser(id: $id) {\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}"): (typeof documents)["query GetOneUser($id: Float!) {\n  getOneUser(id: $id) {\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetOneByAuth0IdUser($authId: String!) {\n  getOneByAuth0IdUser(authId: $authId) {\n    auth0Id\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}"): (typeof documents)["query GetOneByAuth0IdUser($authId: String!) {\n  getOneByAuth0IdUser(authId: $authId) {\n    auth0Id\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -59,6 +75,10 @@ export function graphql(source: "query GetTrendingMovies($page: Float!) {\n  get
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query SearchMovie($search: String!) {\n  searchMovie(search: $search) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}"): (typeof documents)["query SearchMovie($search: String!) {\n  searchMovie(search: $search) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation UpdateUser($updateUserInput: UpdateUserInput!) {\n  updateUser(updateUserInput: $updateUserInput) {\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}"): (typeof documents)["mutation UpdateUser($updateUserInput: UpdateUserInput!) {\n  updateUser(updateUserInput: $updateUserInput) {\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
