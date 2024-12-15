@@ -14,13 +14,14 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { data, loading, error, refetch } = useQuery(
     GetOneByAuth0IdUserDocument,
     {
-      variables: { authId: user?.sub ?? "" },
+      variables: { authId: user?.sub ?? "auth0|67560bd505921aeb3737847e" },
       skip: !user?.sub,
     }
   );
 
   const [createUser] = useMutation(CreateUserDocument);
   const [updateUser] = useMutation(UpdateUserDocument);
+  console.log("USER DATA", data?.getOneByAuth0IdUser);
 
   useEffect(() => {
     if (isLoading || !user || data?.getOneByAuth0IdUser) return;

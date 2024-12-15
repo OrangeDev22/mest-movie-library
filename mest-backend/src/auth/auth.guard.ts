@@ -52,6 +52,8 @@ export class AuthGuard implements CanActivate {
     // );
     try {
       await checkJwt(req, res);
+
+      ctx.getContext().auth0Id = req.auth?.sub;
       return true;
     } catch (error) {
       console.log('ERROR', error);

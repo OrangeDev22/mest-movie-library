@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth/auth.guard';
 import { UserModule } from './api/user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { FavoriteMoviesModule } from './api/favorite-movies/favorite-movies.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { PrismaModule } from './prisma/prisma.module';
     AuthModule,
     UserModule,
     PrismaModule,
+    FavoriteMoviesModule,
   ],
   controllers: [AppController],
   providers: [AppService, AuthGuard],

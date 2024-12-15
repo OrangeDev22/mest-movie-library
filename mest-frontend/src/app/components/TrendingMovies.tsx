@@ -6,6 +6,7 @@ import { GetTrendingMoviesDocument, MovieType } from "@/__generated__/graphql";
 import MovieList from "./MovieList";
 import { getClient } from "@/lib/client";
 import PaginationComponent from "./PaginationComponent";
+import { getSession } from "@auth0/nextjs-auth0";
 
 interface Props {
   page: number;
@@ -15,8 +16,10 @@ async function TrendingMovies({ page }: Props) {
   const { data, error, loading } = await getClient().query({
     query: GetTrendingMoviesDocument,
     variables: { page },
+    fetchPolicy: "network-only",
   });
-
+  const session = await getSession();
+  console.log("--token", session?.accessToken);
   if (error) {
     return <div>Error</div>;
   }
