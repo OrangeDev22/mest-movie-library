@@ -95,8 +95,14 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type FavoriteMovie {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: Int!
+  movieId: String!
+  title: String!
+  genre: String!
+  releaseYear: Int!
+  auth0Id: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Query {
@@ -139,12 +145,10 @@ input UpdateUserInput {
 }
 
 input CreateFavoriteMovieInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  movieId: String!
 }
 
 input UpdateFavoriteMovieInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  movieId: String
   id: Int!
 }

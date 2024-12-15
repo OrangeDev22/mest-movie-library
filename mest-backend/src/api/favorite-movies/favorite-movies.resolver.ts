@@ -15,11 +15,12 @@ export class FavoriteMoviesResolver {
   createFavoriteMovie(
     @Args('createFavoriteMovieInput')
     createFavoriteMovieInput: CreateFavoriteMovieInput,
-    @Context() context: any,
+    @Context() context: { auth0Id: string },
   ) {
-    console.log('--context', context.auth0Id);
-    return true;
-    // return this.favoriteMoviesService.create(createFavoriteMovieInput);
+    return this.favoriteMoviesService.create(
+      createFavoriteMovieInput,
+      context.auth0Id,
+    );
   }
 
   @Query(() => [FavoriteMovie], { name: 'favoriteMovies' })

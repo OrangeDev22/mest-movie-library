@@ -12,9 +12,7 @@ datasource db {
 
 model FavoriteMovie {
   id          Int      @id @default(autoincrement())
-  title       String
-  genre       String
-  releaseYear Int
+  movieId    String   @unique
   userId      Int
   user        User     @relation(fields: [userId], references: [id]) // Relation to User
   createdAt   DateTime @default(now())
