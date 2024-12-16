@@ -6,19 +6,22 @@ import { CastMember } from './entities/castMember';
 import { MovieResponseType } from './entities/movie.response';
 import { UseGuards } from '@nestjs/common/decorators';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { MovieSearchResponse } from './entities/movieSearch.response';
 
 @Resolver()
 export class MoviesResolver {
   constructor(private readonly moviesService: MoviesService) {}
 
-  @Query(() => [MovieType])
-  searchMovie(@Args('search', { type: () => String }) search: string) {
-    return this.moviesService.searchMovie(search);
+  @Query(() => MovieSearchResponse)
+  searchMovie(
+    @Args('search', { type: () => String }) search: string,
+    @Args('page', { type: () => Number, nullable: true, defaultValue: 1 })
+    page: number,
+  ) {
+    return this.moviesService.searchMovie(search, page);
   }
 
-  // Commented code for future references
-  // @UseGuards(AuthGuard)
-  @Query(() => [MovieType], { name: 'getTrendingMovies' })
+  @Query(() => MovieSearchResponse, { name: 'getTrendingMovies' })
   getTrendingMovies(@Args('page', { type: () => Number }) page: number) {
     return this.moviesService.getTrendingMovies(page);
   }

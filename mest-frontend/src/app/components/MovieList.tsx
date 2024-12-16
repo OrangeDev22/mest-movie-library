@@ -1,4 +1,4 @@
-import { GetSimilarMoviesQuery, MovieType } from "@/__generated__/graphql";
+import { MovieType } from "@/__generated__/graphql";
 import React from "react";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 import MovieCard from "./MovieCard";

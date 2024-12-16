@@ -5,6 +5,7 @@ import { HttpService } from '@nestjs/axios';
 import { MovieClip } from './entities/movieClip.entity';
 import { CastMember } from './entities/castMember';
 import { MovieResponseType } from './entities/movie.response';
+import { MovieSearchResponse } from './entities/movieSearch.response';
 
 @Injectable()
 export class MoviesService {
@@ -72,7 +73,7 @@ export class MoviesService {
         })
         .pipe(
           map((response) => {
-            return response.data.results as MovieType[];
+            return response.data.results;
           }),
           catchError((error) => {
             console.log('--error', error.message);
@@ -85,11 +86,14 @@ export class MoviesService {
     return this.remapDataWithImages(data);
   }
 
-  async searchMovie(search: String): Promise<MovieType[]> {
+  async searchMovie(
+    search: String,
+    page: number,
+  ): Promise<MovieSearchResponse> {
     const data = await firstValueFrom(
       this.httpService
         .get(
-          `${this.endpoint}/search/movie?query=${search}&include_adult=false&language=en-US&page=1`,
+          `${this.endpoint}/search/movie?query=${search}&include_adult=false&language=en-US&page=${page}`,
           {
             headers: {
               Authorization: `Bearer ${this.accessToken}`,
@@ -98,7 +102,10 @@ export class MoviesService {
         )
         .pipe(
           map((response) => {
-            return response.data.results as MovieType[];
+            return {
+              movies: response?.data?.results as MovieType[],
+              total_pages: response?.data?.total_pages,
+            };
           }),
           catchError((error) => {
             console.log('--error', error.message);
@@ -108,10 +115,11 @@ export class MoviesService {
           }),
         ),
     );
-    return this.remapDataWithImages(data);
+
+    return { ...data, movies: this.remapDataWithImages(data.movies) };
   }
 
-  async getTrendingMovies(page: number): Promise<MovieType[]> {
+  async getTrendingMovies(page: number): Promise<MovieSearchResponse> {
     const data = await firstValueFrom(
       this.httpService
         .get(
@@ -124,7 +132,10 @@ export class MoviesService {
         )
         .pipe(
           map((response) => {
-            return response.data.results as MovieType[];
+            return {
+              total_pages: response?.data?.total_pages,
+              movies: response.data.results as MovieType[],
+            };
           }),
           catchError((error) => {
             console.log('--error', error.message);
@@ -134,7 +145,7 @@ export class MoviesService {
           }),
         ),
     );
-    return this.remapDataWithImages(data);
+    return { ...data, movies: this.remapDataWithImages(data.movies) };
   }
 
   async getTopTrendingMovies() {
@@ -170,7 +181,6 @@ export class MoviesService {
         })
         .pipe(
           map((response) => {
-            console.log(JSON.stringify(response.data.cast));
             return response.data.cast;
           }),
           catchError((error) => {

@@ -79,6 +79,11 @@ type MovieResponseType {
   production_companies: [ProductionCompany!]
 }
 
+type MovieSearchResponse {
+  movies: [MovieType!]!
+  total_pages: Int!
+}
+
 type User {
   auth0Id: String!
   id: Int!
@@ -118,8 +123,8 @@ type RemoveFavoriteMovie {
 }
 
 type Query {
-  searchMovie(search: String!): [MovieType!]!
-  getTrendingMovies(page: Float!): [MovieType!]!
+  searchMovie(search: String!, page: Float = 1): MovieSearchResponse!
+  getTrendingMovies(page: Float!): MovieSearchResponse!
   getOneMmovie(id: ID!): MovieResponseType!
   getSimilarMovies(id: ID!): [MovieType!]!
   getTopTrendingMovies: [MovieType!]!

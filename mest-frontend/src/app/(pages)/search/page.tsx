@@ -1,73 +1,63 @@
-"use client";
 import { MovieType, SearchMovieDocument } from "@/__generated__/graphql";
 import MovieList from "@/app/components/MovieList";
-import { useQuery } from "@apollo/client";
-import React, { useEffect, useState } from "react";
+import PaginationComponent from "@/app/components/PaginationComponent";
+import { getClient } from "@/lib/client";
+import { redirect } from "next/navigation";
 
-function Search({
+async function Search({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  const page =
+    typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
+
   const searchValue =
     typeof searchParams.searchValue === "string"
       ? searchParams.searchValue
       : "";
 
-  const { data, loading } = useQuery(SearchMovieDocument, {
-    variables: { search: searchValue },
+  if (page > 500) redirect(`/search?searchValue=${searchValue}&page=1`);
+
+  const { data, loading } = await getClient().query({
+    query: SearchMovieDocument,
+    variables: { search: searchValue, page },
   });
-  const [movies, setMovies] = useState<MovieType[]>([]);
-  const [pageState, setPageState] = useState(1);
-  const moviesPerPage = 9;
 
-  useEffect(() => {
-    if (data?.searchMovie) setMovies(data?.searchMovie as MovieType[]);
-  }, [data]);
+  const {
+    searchMovie: { movies, total_pages },
+  } = data;
 
-  const maxPageLimit = Math.ceil(movies.length / moviesPerPage);
+  const redirectTo = `/search`;
 
-  const handleNextPageClick = () => {
-    setPageState((prevPage) => Math.min(prevPage + 1, maxPageLimit));
-  };
-
-  const handlePrevPageClick = () => {
-    setPageState((prevPage) => Math.max(prevPage - 1, 1));
-  };
-
-  const startIndex = (pageState - 1) * moviesPerPage;
-  const endIndex = startIndex + moviesPerPage;
-  const slicedMovies = movies.slice(startIndex, endIndex);
+  if (page > total_pages) {
+    redirect(`/search?searchValue=${searchValue}&page=${total_pages}`);
+  }
 
   return (
     <div className="space-y-5 flex flex-col max-w-5xl mx-auto my-4">
-      <div className="join self-center">
-        <button
-          className="join-item btn"
-          onClick={handlePrevPageClick}
-          disabled={pageState === 1}
-        >
-          «
-        </button>
-        <div className="join-item btn">Page {pageState}</div>
-        <button
-          className="join-item btn"
-          onClick={handleNextPageClick}
-          disabled={pageState === maxPageLimit}
-        >
-          »
-        </button>
-      </div>
+      <PaginationComponent
+        page={page}
+        paginationLimit={total_pages}
+        redirectTo={redirectTo}
+        query={{ searchValue }}
+      />
 
       <h2 className="text-2xl font-bold mb-4">Search Results</h2>
 
-      {slicedMovies.length === 0 && !loading && <div>No Results...</div>}
+      {movies.length === 0 && !loading && <div>No Results...</div>}
 
-      {((slicedMovies && slicedMovies.length > 0) || loading) && (
+      {((movies && movies.length > 0) || loading) && (
         <>
-          <MovieList data={slicedMovies as MovieType[]} loading={loading} />
+          <MovieList data={movies as MovieType[]} loading={loading} />
         </>
       )}
+
+      <PaginationComponent
+        page={page}
+        paginationLimit={total_pages}
+        redirectTo={redirectTo}
+      />
     </div>
   );
 }
