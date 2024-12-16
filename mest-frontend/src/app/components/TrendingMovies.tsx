@@ -19,7 +19,7 @@ async function TrendingMovies({ page }: Props) {
     fetchPolicy: "network-only",
   });
   const session = await getSession();
-  console.log("--token", session?.accessToken);
+
   if (error) {
     return <div>Error</div>;
   }

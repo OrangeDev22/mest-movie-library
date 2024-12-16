@@ -9,8 +9,8 @@ function MovieList({
   loading,
   rootClassName,
 }: {
-  data: MovieType[];
-  loading: boolean;
+  data: Pick<MovieType, "id" | "title" | "poster_path">[];
+  loading?: boolean;
   rootClassName?: string;
 }) {
   if (loading) {
@@ -39,7 +39,7 @@ function MovieList({
       )}
     >
       {data.map((movie) => (
-        <div className="w-full h-full">
+        <div className="w-full h-full" key={movie.id}>
           <MovieCard movie={movie} />
         </div>
       ))}

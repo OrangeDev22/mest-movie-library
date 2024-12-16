@@ -35,7 +35,7 @@ export default async function RootLayout({
             <UserAuthProvider>
               <Providers>
                 <Navbar />
-                {children}
+                <div className="p-10">{children}</div>
               </Providers>
             </UserAuthProvider>
           </ApolloWrapper>

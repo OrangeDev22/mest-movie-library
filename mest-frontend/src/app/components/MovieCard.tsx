@@ -5,7 +5,7 @@ import MovieCardButtons from "./MovieCardButtons";
 import { MovieType } from "@/__generated__/graphql";
 
 interface Props {
-  movie: MovieType;
+  movie: Pick<MovieType, "id" | "title" | "poster_path">;
 }
 
 function MovieCard({ movie }: Props) {
