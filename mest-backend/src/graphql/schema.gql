@@ -100,7 +100,15 @@ type FavoriteMovie {
   title: String!
   genre: String!
   releaseYear: Int!
-  auth0Id: String!
+  userId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CreateFavoriteMovie {
+  id: Int!
+  movieId: String!
+  userId: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -124,7 +132,7 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   deleteUser(id: Float!): User!
-  createFavoriteMovie(createFavoriteMovieInput: CreateFavoriteMovieInput!): FavoriteMovie!
+  createFavoriteMovie(createFavoriteMovieInput: CreateFavoriteMovieInput!): CreateFavoriteMovie!
   updateFavoriteMovie(updateFavoriteMovieInput: UpdateFavoriteMovieInput!): FavoriteMovie!
   removeFavoriteMovie(id: Int!): FavoriteMovie!
 }

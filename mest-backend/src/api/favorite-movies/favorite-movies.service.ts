@@ -1,4 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
 import { CreateFavoriteMovieInput } from './dto/create-favorite-movie.input';
 import { UpdateFavoriteMovieInput } from './dto/update-favorite-movie.input';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -8,13 +13,24 @@ export class FavoriteMoviesService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateFavoriteMovieInput, auth0Id) {
-    const user = await this.prisma.user.findUnique({ where: { auth0Id } });
+    const user = await this.prisma.user.findUnique({
+      where: { auth0Id },
+      include: { favoriteMovies: true },
+    });
 
     if (!user) {
       throw new HttpException(
         'User not found',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
+    }
+
+    const isMovieAlreadyFavorite = user.favoriteMovies.some(
+      (movie) => movie.movieId === data.movieId,
+    );
+
+    if (isMovieAlreadyFavorite) {
+      throw new BadRequestException('Movie already in favorites');
     }
 
     return await this.prisma.favoriteMovie.create({

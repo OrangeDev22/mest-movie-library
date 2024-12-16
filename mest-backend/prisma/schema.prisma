@@ -12,7 +12,7 @@ datasource db {
 
 model FavoriteMovie {
   id          Int      @id @default(autoincrement())
-  movieId    String   @unique
+  movieId     String   
   userId      Int
   user        User     @relation(fields: [userId], references: [id]) // Relation to User
   createdAt   DateTime @default(now())
@@ -27,5 +27,5 @@ model User {
   email         String          @unique
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
-  FavoriteMovie FavoriteMovie[]
+  favoriteMovies FavoriteMovie[]
 }

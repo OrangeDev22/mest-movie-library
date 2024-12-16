@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "mutation CreateFavoriteMovie($createFavoriteMovieInput: CreateFavoriteMovieInput!) {\n  createFavoriteMovie(createFavoriteMovieInput: $createFavoriteMovieInput) {\n    id\n    movieId\n    userId\n    createdAt\n    updatedAt\n  }\n}": types.CreateFavoriteMovieDocument,
     "mutation CreateUser($createUserInput: CreateUserInput!) {\n  createUser(createUserInput: $createUserInput) {\n    auth0Id\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}": types.CreateUserDocument,
     "query GetMovieClips($getMovieClipsId: ID!) {\n  getMovieClips(id: $getMovieClipsId) {\n    id\n    name\n    key\n    site\n    size\n    type\n    official\n    published_at\n  }\n}": types.GetMovieClipsDocument,
     "query GetOneMmovie($getOneMmovieId: ID!) {\n  getOneMmovie(id: $getOneMmovieId) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n    production_companies {\n      id\n      name\n    }\n    genres {\n      id\n      name\n    }\n  }\n}": types.GetOneMmovieDocument,
@@ -39,6 +40,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation CreateFavoriteMovie($createFavoriteMovieInput: CreateFavoriteMovieInput!) {\n  createFavoriteMovie(createFavoriteMovieInput: $createFavoriteMovieInput) {\n    id\n    movieId\n    userId\n    createdAt\n    updatedAt\n  }\n}"): (typeof documents)["mutation CreateFavoriteMovie($createFavoriteMovieInput: CreateFavoriteMovieInput!) {\n  createFavoriteMovie(createFavoriteMovieInput: $createFavoriteMovieInput) {\n    id\n    movieId\n    userId\n    createdAt\n    updatedAt\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -11,6 +11,7 @@ import { checkUserIsSync } from "@/utils";
 
 const UserAuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { user, isLoading } = useUser();
+  console.log("--user", user);
   const { data, loading, error, refetch } = useQuery(
     GetOneByAuth0IdUserDocument,
     {

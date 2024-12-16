@@ -35,11 +35,36 @@ export type CastMember = {
   profile_path?: Maybe<Scalars['String']['output']>;
 };
 
+export type CreateFavoriteMovie = {
+  __typename?: 'CreateFavoriteMovie';
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['Int']['output'];
+  movieId: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  userId: Scalars['String']['output'];
+};
+
+export type CreateFavoriteMovieInput = {
+  movieId: Scalars['String']['input'];
+};
+
 export type CreateUserInput = {
   auth0Id: Scalars['String']['input'];
   email: Scalars['String']['input'];
   name: Scalars['String']['input'];
   nickName: Scalars['String']['input'];
+};
+
+export type FavoriteMovie = {
+  __typename?: 'FavoriteMovie';
+  createdAt: Scalars['DateTime']['output'];
+  genre: Scalars['String']['output'];
+  id: Scalars['Int']['output'];
+  movieId: Scalars['String']['output'];
+  releaseYear: Scalars['Int']['output'];
+  title: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  userId: Scalars['String']['output'];
 };
 
 export type Genre = {
@@ -104,9 +129,17 @@ export type MovieType = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createFavoriteMovie: CreateFavoriteMovie;
   createUser: User;
   deleteUser: User;
+  removeFavoriteMovie: FavoriteMovie;
+  updateFavoriteMovie: FavoriteMovie;
   updateUser: User;
+};
+
+
+export type MutationCreateFavoriteMovieArgs = {
+  createFavoriteMovieInput: CreateFavoriteMovieInput;
 };
 
 
@@ -117,6 +150,16 @@ export type MutationCreateUserArgs = {
 
 export type MutationDeleteUserArgs = {
   id: Scalars['Float']['input'];
+};
+
+
+export type MutationRemoveFavoriteMovieArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type MutationUpdateFavoriteMovieArgs = {
+  updateFavoriteMovieInput: UpdateFavoriteMovieInput;
 };
 
 
@@ -132,6 +175,8 @@ export type ProductionCompany = {
 
 export type Query = {
   __typename?: 'Query';
+  favoriteMovie: FavoriteMovie;
+  favoriteMovies: Array<FavoriteMovie>;
   getAllUsers: Array<User>;
   getMovieCast: Array<CastMember>;
   getMovieClips: Array<MovieClip>;
@@ -142,6 +187,11 @@ export type Query = {
   getTopTrendingMovies: Array<MovieType>;
   getTrendingMovies: Array<MovieType>;
   searchMovie: Array<MovieType>;
+};
+
+
+export type QueryFavoriteMovieArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -184,6 +234,11 @@ export type QuerySearchMovieArgs = {
   search: Scalars['String']['input'];
 };
 
+export type UpdateFavoriteMovieInput = {
+  id: Scalars['Int']['input'];
+  movieId?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type UpdateUserInput = {
   auth0Id?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
@@ -202,6 +257,13 @@ export type User = {
   nickName: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
+
+export type CreateFavoriteMovieMutationVariables = Exact<{
+  createFavoriteMovieInput: CreateFavoriteMovieInput;
+}>;
+
+
+export type CreateFavoriteMovieMutation = { __typename?: 'Mutation', createFavoriteMovie: { __typename?: 'CreateFavoriteMovie', id: number, movieId: string, userId: string, createdAt: any, updatedAt: any } };
 
 export type CreateUserMutationVariables = Exact<{
   createUserInput: CreateUserInput;
@@ -272,6 +334,7 @@ export type UpdateUserMutationVariables = Exact<{
 export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: number, nickName: string, name: string, email: string, createdAt: any, updatedAt: any } };
 
 
+export const CreateFavoriteMovieDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateFavoriteMovie"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"createFavoriteMovieInput"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateFavoriteMovieInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createFavoriteMovie"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"createFavoriteMovieInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"createFavoriteMovieInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"movieId"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<CreateFavoriteMovieMutation, CreateFavoriteMovieMutationVariables>;
 export const CreateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"createUserInput"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"createUserInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"createUserInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"auth0Id"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"nickName"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;
 export const GetMovieClipsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetMovieClips"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"getMovieClipsId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getMovieClips"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"getMovieClipsId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"site"}},{"kind":"Field","name":{"kind":"Name","value":"size"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"official"}},{"kind":"Field","name":{"kind":"Name","value":"published_at"}}]}}]}}]} as unknown as DocumentNode<GetMovieClipsQuery, GetMovieClipsQueryVariables>;
 export const GetOneMmovieDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetOneMmovie"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"getOneMmovieId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getOneMmovie"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"getOneMmovieId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"adult"}},{"kind":"Field","name":{"kind":"Name","value":"backdrop_path"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"original_language"}},{"kind":"Field","name":{"kind":"Name","value":"original_title"}},{"kind":"Field","name":{"kind":"Name","value":"overview"}},{"kind":"Field","name":{"kind":"Name","value":"poster_path"}},{"kind":"Field","name":{"kind":"Name","value":"media_type"}},{"kind":"Field","name":{"kind":"Name","value":"genre_ids"}},{"kind":"Field","name":{"kind":"Name","value":"popularity"}},{"kind":"Field","name":{"kind":"Name","value":"release_date"}},{"kind":"Field","name":{"kind":"Name","value":"video"}},{"kind":"Field","name":{"kind":"Name","value":"vote_average"}},{"kind":"Field","name":{"kind":"Name","value":"vote_count"}},{"kind":"Field","name":{"kind":"Name","value":"production_companies"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"genres"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<GetOneMmovieQuery, GetOneMmovieQueryVariables>;

@@ -22,13 +22,16 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getSession();
-
+  console.log("--session", session);
   // if()
   return (
     <html lang="en" className="h-full">
       <body className="bg-background-primary text-white min-h-full">
         <UserProvider>
-          <ApolloWrapper accessToken={session?.accessToken || ""}>
+          <ApolloWrapper
+            accessToken={session?.accessToken || ""}
+            accessTokenExpiresAt={session?.accessTokenExpiresAt}
+          >
             <UserAuthProvider>
               <Providers>
                 <Navbar />
