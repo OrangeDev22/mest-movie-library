@@ -7,10 +7,14 @@ import {
 import { CreateFavoriteMovieInput } from './dto/create-favorite-movie.input';
 import { UpdateFavoriteMovieInput } from './dto/update-favorite-movie.input';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { MoviesService } from '../movies/movies.service';
 
 @Injectable()
 export class FavoriteMoviesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly movieService: MoviesService,
+  ) {}
 
   async create(data: CreateFavoriteMovieInput, auth0Id: string) {
     const user = await this.prisma.user.findUnique({
@@ -33,9 +37,16 @@ export class FavoriteMoviesService {
       throw new BadRequestException('Movie already in favorites');
     }
 
-    return await this.prisma.favoriteMovie.create({
+    const newFavoriteMovie = await this.prisma.favoriteMovie.create({
       data: { ...data, userId: user.id },
     });
+
+    const apiMovie = await this.movieService.getOneMovie(
+      +newFavoriteMovie.movieId,
+    );
+    console.log('--api movie', apiMovie);
+    console.log('--final movie', { ...apiMovie, ...newFavoriteMovie });
+    return { ...apiMovie, ...newFavoriteMovie };
   }
 
   async findAll(auth0Id: string) {
@@ -51,7 +62,18 @@ export class FavoriteMoviesService {
       );
     }
 
-    return this.prisma.favoriteMovie.findMany({ where: { userId: user.id } });
+    const favoriteMovies = await this.prisma.favoriteMovie.findMany({
+      where: { userId: user.id },
+    });
+
+    const apiMovies = await Promise.all(
+      favoriteMovies.map(async (movie) => {
+        const apiMovie = await this.movieService.getOneMovie(+movie.movieId);
+        return { ...apiMovie, ...movie };
+      }),
+    );
+
+    return await apiMovies;
   }
 
   findOne(id: number) {
@@ -62,7 +84,8 @@ export class FavoriteMoviesService {
     return `This action updates a #${id} favoriteMovie`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} favoriteMovie`;
+  async remove(id: number) {
+    console.log('--movie id', id);
+    return this.prisma.favoriteMovie.delete({ where: { id } });
   }
 }

@@ -6,6 +6,7 @@ import { useMutation } from "@apollo/client";
 import {
   CreateFavoriteMovieDocument,
   MovieType,
+  RemoveFavoriteMovieDocument,
 } from "@/__generated__/graphql";
 import { twMerge } from "tailwind-merge";
 import useFavoriteMoviesStore from "../stores/favoriteMoviesStores";
@@ -14,10 +15,12 @@ import { useEffect, useState } from "react";
 const MovieCardButtons = ({ id }: { id: string }) => {
   const { user } = useUser();
   const [isFavorite, setIsFavorite] = useState(false);
-  const { favoriteMovies, addFavoriteMovie } = useFavoriteMoviesStore();
-  const [createFavoriteMovie, { loading }] = useMutation(
-    CreateFavoriteMovieDocument
-  );
+  const { favoriteMovies, addFavoriteMovie, removeFavoriteMovie } =
+    useFavoriteMoviesStore();
+  const [createFavoriteMovie, { loading: isCreatingFavoriteMovie }] =
+    useMutation(CreateFavoriteMovieDocument);
+  const [deleteFavoriteMovie, { loading: isDeletingFavoriteMovie }] =
+    useMutation(RemoveFavoriteMovieDocument);
 
   useEffect(() => {
     if (!favoriteMovies) return;
@@ -40,6 +43,23 @@ const MovieCardButtons = ({ id }: { id: string }) => {
     }
   };
 
+  const handleRemoveMovie = async () => {
+    try {
+      const response = await deleteFavoriteMovie({
+        variables: {
+          removeFavoriteMovieId:
+            favoriteMovies.find((movie) => movie.movieId === id)?.id || 0,
+        },
+      });
+
+      if (response.data?.removeFavoriteMovie) {
+        removeFavoriteMovie(response.data.removeFavoriteMovie.id);
+      }
+    } catch (error) {
+      console.error("Error deleting favorite movie", error);
+    }
+  };
+
   if (!user) return null;
 
   return (
@@ -48,7 +68,7 @@ const MovieCardButtons = ({ id }: { id: string }) => {
         <Button
           className={twMerge(
             "w-full",
-            loading ? "opacity-50 cursor-not-allowed" : ""
+            isCreatingFavoriteMovie ? "opacity-50 cursor-not-allowed" : ""
           )}
           onClick={async (e) => {
             e.stopPropagation();
@@ -59,7 +79,18 @@ const MovieCardButtons = ({ id }: { id: string }) => {
         </Button>
       )}
       {isFavorite && (
-        <Button className={twMerge("w-full")}>Remove from favorites</Button>
+        <Button
+          className={twMerge(
+            "w-full",
+            isDeletingFavoriteMovie ? "opacity-50 cursor-not-allowed" : ""
+          )}
+          onClick={async (e) => {
+            e.stopPropagation();
+            handleRemoveMovie();
+          }}
+        >
+          Remove from favorites
+        </Button>
       )}
     </div>
   );

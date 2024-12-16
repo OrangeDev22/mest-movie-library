@@ -3,6 +3,8 @@ import { create } from "zustand";
 type FavoriteMovie = {
   id: number;
   movieId: string;
+  title: string;
+  poster_path: string;
 };
 
 interface FavoriteMoviesState {

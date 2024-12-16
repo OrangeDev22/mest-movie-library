@@ -4,5 +4,7 @@ mutation CreateFavoriteMovie(
   createFavoriteMovie(createFavoriteMovieInput: $createFavoriteMovieInput) {
     id
     movieId
+    poster_path
+    title
   }
 }

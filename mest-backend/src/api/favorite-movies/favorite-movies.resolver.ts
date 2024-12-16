@@ -6,6 +6,7 @@ import { UpdateFavoriteMovieInput } from './dto/update-favorite-movie.input';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { CreateFavoriteMovie } from './entities/create-favorite-movie.entity';
+import { RemoveFavoriteMovie } from './entities/remove-favorite-movie';
 
 @Resolver(() => FavoriteMovie)
 export class FavoriteMoviesResolver {
@@ -46,7 +47,7 @@ export class FavoriteMoviesResolver {
     );
   }
 
-  @Mutation(() => FavoriteMovie)
+  @Mutation(() => RemoveFavoriteMovie)
   removeFavoriteMovie(@Args('id', { type: () => Int }) id: number) {
     return this.favoriteMoviesService.remove(id);
   }

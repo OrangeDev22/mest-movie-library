@@ -95,6 +95,17 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type FavoriteMovie {
+  title: String!
+  poster_path: String!
+  id: Int!
+  movieId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type CreateFavoriteMovie {
+  title: String!
+  poster_path: String!
   id: Int!
   movieId: String!
   userId: String!
@@ -102,12 +113,8 @@ type FavoriteMovie {
   updatedAt: DateTime!
 }
 
-type CreateFavoriteMovie {
+type RemoveFavoriteMovie {
   id: Int!
-  movieId: String!
-  userId: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
 
 type Query {
@@ -131,7 +138,7 @@ type Mutation {
   deleteUser(id: Float!): User!
   createFavoriteMovie(createFavoriteMovieInput: CreateFavoriteMovieInput!): CreateFavoriteMovie!
   updateFavoriteMovie(updateFavoriteMovieInput: UpdateFavoriteMovieInput!): FavoriteMovie!
-  removeFavoriteMovie(id: Int!): FavoriteMovie!
+  removeFavoriteMovie(id: Int!): RemoveFavoriteMovie!
 }
 
 input CreateUserInput {

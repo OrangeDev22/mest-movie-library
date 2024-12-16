@@ -12,12 +12,17 @@ const FaboriteMoviesProvider = ({
   children: React.ReactNode;
 }) => {
   const { user, isLoading: isLoadingUser } = useUser();
-  const { data, loading } = useQuery(FindAllFavoriteMoviesDocument);
+  const { data, loading, error } = useQuery(FindAllFavoriteMoviesDocument);
+
   const { setFavoriteMovies } = useFavoriteMoviesStore();
+
   useEffect(() => {
     if (loading || !data?.favoriteMovies || !user || isLoadingUser) return;
     setFavoriteMovies(data.favoriteMovies);
   }, [data, user]);
+  if (loading) {
+    return <>Loading...</>;
+  }
   return <>{children}</>;
 };
 
