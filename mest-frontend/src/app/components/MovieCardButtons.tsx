@@ -16,7 +16,7 @@ const MovieCardButtons = ({ id }: { id: string }) => {
   );
 
   if (!user) return null;
-  console.log("is submiting", loading);
+
   return (
     <div className="mt-auto">
       <Button
