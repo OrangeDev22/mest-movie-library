@@ -11,7 +11,7 @@ import { checkUserIsSync } from "@/utils";
 
 const UserAuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { user, isLoading } = useUser();
-  console.log("--user", user);
+
   const { data, loading, error, refetch } = useQuery(
     GetOneByAuth0IdUserDocument,
     {
@@ -22,7 +22,6 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [createUser] = useMutation(CreateUserDocument);
   const [updateUser] = useMutation(UpdateUserDocument);
-  console.log("USER DATA", data?.getOneByAuth0IdUser);
 
   useEffect(() => {
     if (isLoading || !user || data?.getOneByAuth0IdUser) return;

@@ -4,8 +4,5 @@ mutation CreateFavoriteMovie(
   createFavoriteMovie(createFavoriteMovieInput: $createFavoriteMovieInput) {
     id
     movieId
-    userId
-    createdAt
-    updatedAt
   }
 }

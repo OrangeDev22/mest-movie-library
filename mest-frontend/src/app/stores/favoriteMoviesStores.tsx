@@ -1,22 +1,20 @@
 import { create } from "zustand";
 
+type FavoriteMovie = {
+  id: number;
+  movieId: string;
+};
+
 interface FavoriteMoviesState {
-  favoriteMovies: Array<{ id: string; movieId: number }>;
-  fetchFavoriteMovies: () => Promise<void>;
-  addFavoriteMovie: (movie: { id: string; movieId: number }) => void;
-  removeFavoriteMovie: (id: string) => void;
+  favoriteMovies: Array<FavoriteMovie>;
+  addFavoriteMovie: (movie: FavoriteMovie) => void;
+  setFavoriteMovies: (movies: FavoriteMovie[]) => void;
+  removeFavoriteMovie: (id: number) => void;
 }
 
 const useFavoriteMoviesStore = create<FavoriteMoviesState>((set) => ({
   favoriteMovies: [],
-
-  fetchFavoriteMovies: async () => {
-    try {
-      console.log("--should fetch movie here");
-    } catch (error) {
-      console.error("Error fetching favorite movies:", error);
-    }
-  },
+  setFavoriteMovies: (movies) => set({ favoriteMovies: movies }),
 
   addFavoriteMovie: (movie) => {
     set((state) => ({

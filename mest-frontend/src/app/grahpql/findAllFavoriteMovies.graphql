@@ -1,0 +1,6 @@
+query FindAllFavoriteMovies {
+  favoriteMovies {
+    id
+    movieId
+  }
+}
