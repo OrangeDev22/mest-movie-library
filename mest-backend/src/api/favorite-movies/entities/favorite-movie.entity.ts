@@ -9,15 +9,6 @@ export class FavoriteMovie {
   movieId: string;
 
   @Field(() => String)
-  title: string;
-
-  @Field(() => String)
-  genre: string;
-
-  @Field(() => Int)
-  releaseYear: number;
-
-  @Field(() => String)
   userId;
 
   @Field()

@@ -97,9 +97,6 @@ scalar DateTime
 type FavoriteMovie {
   id: Int!
   movieId: String!
-  title: String!
-  genre: String!
-  releaseYear: Int!
   userId: String!
   createdAt: DateTime!
   updatedAt: DateTime!

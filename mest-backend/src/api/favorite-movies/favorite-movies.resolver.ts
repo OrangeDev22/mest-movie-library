@@ -24,9 +24,10 @@ export class FavoriteMoviesResolver {
     );
   }
 
+  @UseGuards(AuthGuard)
   @Query(() => [FavoriteMovie], { name: 'favoriteMovies' })
-  findAll() {
-    return this.favoriteMoviesService.findAll();
+  findAllFavoriteMovies(@Context() context: { auth0Id: string }) {
+    return this.favoriteMoviesService.findAll(context.auth0Id);
   }
 
   @Query(() => FavoriteMovie, { name: 'favoriteMovie' })

@@ -12,7 +12,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class FavoriteMoviesService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateFavoriteMovieInput, auth0Id) {
+  async create(data: CreateFavoriteMovieInput, auth0Id: string) {
     const user = await this.prisma.user.findUnique({
       where: { auth0Id },
       include: { favoriteMovies: true },
@@ -38,8 +38,20 @@ export class FavoriteMoviesService {
     });
   }
 
-  findAll() {
-    return `This action returns all favoriteMovies`;
+  async findAll(auth0Id: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { auth0Id },
+      include: { favoriteMovies: true },
+    });
+
+    if (!user) {
+      throw new HttpException(
+        'User not found',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+
+    return this.prisma.favoriteMovie.findMany({ where: { userId: user.id } });
   }
 
   findOne(id: number) {
