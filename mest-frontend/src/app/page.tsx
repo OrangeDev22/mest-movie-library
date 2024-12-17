@@ -11,7 +11,7 @@ function HomePage({
     typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
 
   return (
-    <div className="bg-background-primary">
+    <div className="bg-background-primary p-4 md:p-0">
       <div className="flex gap-4 justify-evenly flex-col md:flex-row">
         <div className="flex-grow my-4">
           <TrendingMovies page={page} />

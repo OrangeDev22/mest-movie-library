@@ -1,7 +1,7 @@
 import React from "react";
 import { upperFirst } from "lodash";
 import Link from "next/link";
-import MovieCardButtons from "./MovieCardButtons";
+import MovieButtons from "./MovieButtons";
 import { MovieType } from "@/__generated__/graphql";
 
 interface Props {
@@ -30,7 +30,7 @@ function MovieCard({ movie }: Props) {
           </div>
         </div>
       </Link>
-      <MovieCardButtons id={movie.id} />
+      <MovieButtons id={movie.id} />
     </div>
   );
 }

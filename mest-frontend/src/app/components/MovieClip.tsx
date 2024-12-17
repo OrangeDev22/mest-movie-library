@@ -28,7 +28,7 @@ async function MovieClip({
   const { getMovieClips } = data;
 
   return (
-    <div className="max-w-screen-2xl mx-auto py-4 px-8 flex flex-col gap-4 w-full ">
+    <div className="max-w-screen-2xl mx-auto md:py-4 -px-4 md:px-8 flex flex-col gap-4 w-full ">
       <div className="w-full h-full grow">
         <VideoPLayer
           videoId={

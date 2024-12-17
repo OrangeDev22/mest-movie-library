@@ -1,6 +1,7 @@
 "use client";
 import dayjs from "dayjs";
 import React from "react";
+import MovieButtons from "./MovieButtons";
 
 type genre = {
   id: number;
@@ -33,9 +34,9 @@ function MovieDetailsCard({
   const filledStars = Math.floor(score / 2);
 
   return (
-    <div className="sm:flex gap-8 mx-auto my-4 px-8 py-4 w-full max-w-screen-2xl">
+    <div className="sm:flex gap-8 mx-auto md:my-4 md:px-8 md:py-4 w-full max-w-screen-2xl">
       <div
-        className={`max-w-[10rem] h-60 rounded-lg w-full overflow-hidden ${
+        className={`md:max-w-[10rem] md:h-60 rounded-lg w-full overflow-hidden ${
           image ? "" : "bg-neutral-300 pb-4"
         }`}
       >
@@ -44,7 +45,7 @@ function MovieDetailsCard({
         )}
       </div>
 
-      <div className="flex flex-col md:flex-row w-full gap-8">
+      <div className="flex flex-col md:flex-row w-full gap-4 md:gap-8">
         <div className="space-y-4 w-3/4">
           <h2 className="text-2xl font-bold">{title}</h2>
           <div>{originalTitle}</div>
@@ -68,26 +69,29 @@ function MovieDetailsCard({
           </div>
         </div>
 
-        <div className="flex flex-col grow bg-neutral-200 h-20 rounded-lg p-2 space-y-1 text-center w-full md:max-w-xs self-center">
-          <div className="font-bold text-violet-500">
-            Score: {score.toFixed(2)} / 10
-          </div>
+        <div className="flex flex-col w-full md:items-end gap-2 md:gap-0">
+          <MovieButtons id={id} rootClassName="mt-0" className="md:w-auto" />
+          <div className="flex flex-col bg-neutral-200 h-20 rounded-lg p-2 space-y-1 text-center w-full md:max-w-xs my-auto">
+            <div className="font-bold text-violet-500">
+              Score: {score.toFixed(2)} / 10
+            </div>
 
-          <div className="flex items-center space-x-1 bg-black p-1 rounded-lg justify-center">
-            {new Array(5).fill(null).map((_, index) => (
-              <svg
-                key={index}
-                className={`w-4 h-4 ${
-                  index < filledStars ? "text-yellow-500" : "text-gray-300"
-                }`}
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 22 20"
-              >
-                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-              </svg>
-            ))}
+            <div className="flex items-center space-x-1 bg-black p-1 rounded-lg justify-center">
+              {new Array(5).fill(null).map((_, index) => (
+                <svg
+                  key={index}
+                  className={`w-4 h-4 ${
+                    index < filledStars ? "text-yellow-500" : "text-gray-300"
+                  }`}
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 22 20"
+                >
+                  <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                </svg>
+              ))}
+            </div>
           </div>
         </div>
       </div>

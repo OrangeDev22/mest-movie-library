@@ -22,8 +22,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getSession();
-  console.log("--session", session);
-  // if()
+
   return (
     <html lang="en" className="h-full">
       <body className="bg-background-primary text-white min-h-full">
@@ -35,7 +34,7 @@ export default async function RootLayout({
             <UserAuthProvider>
               <Providers>
                 <Navbar />
-                <div className="p-10">{children}</div>
+                <div className="md:p-10">{children}</div>
               </Providers>
             </UserAuthProvider>
           </ApolloWrapper>

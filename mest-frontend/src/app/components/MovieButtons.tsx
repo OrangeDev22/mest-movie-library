@@ -12,7 +12,15 @@ import { twMerge } from "tailwind-merge";
 import useFavoriteMoviesStore from "../stores/favoriteMoviesStores";
 import { useEffect, useState } from "react";
 
-const MovieCardButtons = ({ id }: { id: string }) => {
+const MovieButtons = ({
+  id,
+  className,
+  rootClassName,
+}: {
+  id: string;
+  className?: string;
+  rootClassName?: string;
+}) => {
   const { user } = useUser();
   const [isFavorite, setIsFavorite] = useState(false);
   const { favoriteMovies, addFavoriteMovie, removeFavoriteMovie } =
@@ -63,12 +71,13 @@ const MovieCardButtons = ({ id }: { id: string }) => {
   if (!user) return null;
 
   return (
-    <div className="mt-auto">
+    <div className={twMerge("mt-auto", rootClassName)}>
       {!isFavorite && (
         <Button
           className={twMerge(
             "w-full",
-            isCreatingFavoriteMovie ? "opacity-50 cursor-not-allowed" : ""
+            isCreatingFavoriteMovie ? "opacity-50 cursor-not-allowed" : "",
+            className
           )}
           onClick={async (e) => {
             e.stopPropagation();
@@ -82,7 +91,8 @@ const MovieCardButtons = ({ id }: { id: string }) => {
         <Button
           className={twMerge(
             "w-full",
-            isDeletingFavoriteMovie ? "opacity-50 cursor-not-allowed" : ""
+            isDeletingFavoriteMovie ? "opacity-50 cursor-not-allowed" : "",
+            className
           )}
           onClick={async (e) => {
             e.stopPropagation();
@@ -96,4 +106,4 @@ const MovieCardButtons = ({ id }: { id: string }) => {
   );
 };
 
-export default MovieCardButtons;
+export default MovieButtons;

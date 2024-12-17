@@ -45,26 +45,28 @@ async function Movie({
   return (
     <div className="flex flex-col space-y-4">
       <MovieClip id={id} selectedClip={selectedClip} />
-      <MovieDetailsCard
-        id={id}
-        title={title}
-        image={poster_path}
-        details={overview}
-        originalTitle={original_title}
-        genres={
-          genres?.map(({ name, id }) => {
-            return { id: +id, name };
-          }) || []
-        }
-        score={vote_average}
-        released={release_date}
-        studio={
-          production_companies && production_companies.length > 0
-            ? production_companies[0].name
-            : ""
-        }
-      />
-      <SimilarMovies movieId={id} />
+      <div className="p-4 md:p-0">
+        <MovieDetailsCard
+          id={id}
+          title={title}
+          image={poster_path}
+          details={overview}
+          originalTitle={original_title}
+          genres={
+            genres?.map(({ name, id }) => {
+              return { id: +id, name };
+            }) || []
+          }
+          score={vote_average}
+          released={release_date}
+          studio={
+            production_companies && production_companies.length > 0
+              ? production_companies[0].name
+              : ""
+          }
+        />
+        <SimilarMovies movieId={id} />
+      </div>
     </div>
   );
 }

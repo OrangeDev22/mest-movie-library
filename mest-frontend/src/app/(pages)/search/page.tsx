@@ -35,7 +35,7 @@ async function Search({
   }
 
   return (
-    <div className="space-y-5 flex flex-col max-w-5xl mx-auto my-4">
+    <div className="space-y-5 flex flex-col max-w-5xl mx-auto my-4 p-4 md:p-0">
       <PaginationComponent
         page={page}
         paginationLimit={total_pages}
