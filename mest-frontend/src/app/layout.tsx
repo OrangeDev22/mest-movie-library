@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/app/components/Navbar";
+import Navbar from "@/app/components/NavBar";
 import Providers from "./Providers";
 import { ApolloWrapper } from "../lib/ApolloWrapper";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
-import { getAccessToken } from "@auth0/nextjs-auth0/edge";
 import { getSession } from "@auth0/nextjs-auth0";
-import { getClient } from "@/lib/client";
 import UserAuthProvider from "./providers/UserAuthProvider";
+
 const inter = Inter({ subsets: ["latin"] });
 inter.className;
 export const metadata: Metadata = {
