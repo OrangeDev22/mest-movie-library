@@ -14,7 +14,7 @@ async function Movie({
   };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const { data, loading } = await getClient().query({
+  const { data } = await getClient().query({
     query: GetOneMmovieDocument,
     variables: { getOneMmovieId: params.id },
   });
@@ -37,10 +37,6 @@ async function Movie({
       production_companies,
     },
   } = data;
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="flex flex-col space-y-4">

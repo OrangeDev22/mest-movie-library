@@ -69,10 +69,6 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [user, data]);
 
-  if (isLoading || loading) {
-    return <div>Loading...</div>;
-  }
-
   if (error) {
     console.error("GraphQL Error:", error);
     return <div>Error loading user data.</div>;

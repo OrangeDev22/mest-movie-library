@@ -6,12 +6,13 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { StarIcon } from "@heroicons/react/24/outline";
+import Loader from "../Loader";
 
 function SearchInput() {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
-  const { data, refetch } = useQuery(SearchMovieDocument, {
+  const { data, refetch, loading } = useQuery(SearchMovieDocument, {
     variables: { search: "" },
     skip: !isFocused,
   });
@@ -54,18 +55,18 @@ function SearchInput() {
           <button
             className="absolute top-2 right-2 text-neutral-400 hover:text-white"
             onClick={() => {
-              setSearchValue(""); // Clear input value
-              setIsFocused(false); // Close dropdown
+              setSearchValue("");
+              setIsFocused(false);
             }}
           >
             <XMarkIcon className="w-5 h-5" />
           </button>
         )}
       </div>
-
       {/* Dropdown */}
       {isFocused && searchValue && (
         <div className="absolute left-0 max-h-[400px] md:h-auto md:left-auto z-50 w-full mt-1 bg-dark-silver border border-neutral-700 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+          {loading && <Loader size="md" />}
           {data?.searchMovie.movies.length === 0 ? (
             <div className="px-4 py-2 text-sm text-neutral-400">
               No results found
