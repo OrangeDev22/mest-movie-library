@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import SearchInput from "./SearchInput";
-import UserNavBarItems from "./UseruthNavbar";
+import UserNavBarItems from "./UserNavBarItems";
 
 function Navbar() {
   return (
