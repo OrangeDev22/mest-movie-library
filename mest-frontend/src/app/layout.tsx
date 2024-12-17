@@ -24,6 +24,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="h-full">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className="bg-background-primary text-white min-h-full">
         <UserProvider>
           <ApolloWrapper

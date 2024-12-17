@@ -5,6 +5,7 @@ import { debounce } from "lodash";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { StarIcon } from "@heroicons/react/24/outline";
 
 function SearchInput() {
   const router = useRouter();
@@ -92,37 +93,16 @@ function SearchInput() {
 
                     {/* Responsive Ratings */}
                     <div className="flex items-center gap-1 text-sm text-gray-300">
-                      {/* Mobile: Single Star */}
-                      <div className="block lg:hidden">
-                        <svg
-                          className="w-4 h-4 text-yellow-400"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          aria-hidden="true"
-                        >
-                          <path d="M12 17.75L6.305 20.815a1 1 0 01-1.448-1.054l1.12-6.543-4.744-4.625a1 1 0 01.554-1.706l6.552-.953 2.933-5.94a1 1 0 011.796 0l2.933 5.94 6.552.953a1 1 0 01.554 1.706l-4.744 4.625 1.12 6.543a1 1 0 01-1.448 1.054L12 17.75z" />
-                        </svg>
-                        <span>{vote_average.toFixed(1)}</span>
-                      </div>
-
-                      {/* Desktop: Full Star Rating */}
-                      <div className="hidden lg:flex gap-1">
+                      <div className="flex gap-1 items-center">
                         {[...Array(5)].map((_, i) => (
-                          <svg
+                          <StarIcon
                             key={i}
                             className={`w-4 h-4 ${
                               i < Math.round(vote_average / 2)
                                 ? "text-yellow-400"
                                 : "text-gray-600"
                             }`}
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path d="M12 17.75L6.305 20.815a1 1 0 01-1.448-1.054l1.12-6.543-4.744-4.625a1 1 0 01.554-1.706l6.552-.953 2.933-5.94a1 1 0 011.796 0l2.933 5.94 6.552.953a1 1 0 01.554 1.706l-4.744 4.625 1.12 6.543a1 1 0 01-1.448 1.054L12 17.75z" />
-                          </svg>
+                          />
                         ))}
                         <span>{vote_average.toFixed(1)}</span>
                       </div>
