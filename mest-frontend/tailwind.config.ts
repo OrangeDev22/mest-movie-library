@@ -32,6 +32,11 @@ const config: Config = {
         "36": "9rem",
         "40": "10rem",
         "2xs": "300px",
+        "80": "320px",
+        xl: "36rem",
+      },
+      minWidth: {
+        xl: "36rem",
       },
       maxHeight: {
         "128": "40rem",

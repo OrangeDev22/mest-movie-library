@@ -6,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import UserPicture from "@/app/components/UserPicture";
 import { twMerge } from "tailwind-merge";
+import Button from "../Button";
 
 const userSettingsSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -17,8 +18,10 @@ type UserSettingsFormData = z.infer<typeof userSettingsSchema>;
 
 const UserSettingsPage = ({
   onFormSubmitCompleted,
+  onCancel,
 }: {
   onFormSubmitCompleted: () => void;
+  onCancel: () => void;
 }) => {
   const { user } = useUser();
 
@@ -65,7 +68,10 @@ const UserSettingsPage = ({
           <UserPicture size="md" />
         </div>
 
-        <form className="flex-1" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="flex-1 flex flex-col"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="mb-4">
             <label className="text-sm text-gray-400 block" htmlFor="name">
               Username
@@ -117,17 +123,20 @@ const UserSettingsPage = ({
             )}
           </div>
 
-          <div className="mt-6 text-center">
-            <button
+          <div className="mt-6 text-center flex gap-2 self-end">
+            <Button type="button" onClick={() => onCancel()}>
+              Cancel
+            </Button>
+            <Button
               type="submit"
               className={twMerge(
-                "bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg font-semibold",
+                "rounded-lg font-semibold",
                 isSubmitting || !isDirty ? "opacity-50 cursor-not-allowed" : ""
               )}
               disabled={isSubmitting || !isDirty}
             >
               Save Changes
-            </button>
+            </Button>
           </div>
         </form>
       </div>

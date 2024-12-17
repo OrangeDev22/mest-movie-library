@@ -8,6 +8,7 @@ interface ButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
   disabled?: boolean;
+  type?: "button" | "submit" | "reset";
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -17,6 +18,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   className,
   disabled = false,
+  type,
 }) => {
   const baseStyles =
     "font-medium rounded focus:outline-none focus:border-none  transition";
@@ -44,7 +46,12 @@ const Button: React.FC<ButtonProps> = ({
   );
 
   return (
-    <button className={classes} onClick={onClick} disabled={disabled}>
+    <button
+      className={classes}
+      onClick={onClick}
+      disabled={disabled}
+      type={type}
+    >
       {children}
     </button>
   );
