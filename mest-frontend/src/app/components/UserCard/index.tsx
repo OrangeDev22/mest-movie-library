@@ -1,5 +1,5 @@
-import UserCardSkeleton from "./UserCardSkeleton";
-import UserPicture from "./UserPicture";
+import UserCardSkeleton from "../UserCardSkeleton";
+import UserPicture from "../UserPicture";
 import { UserProfile } from "@auth0/nextjs-auth0/client";
 
 interface UserCardProps {
