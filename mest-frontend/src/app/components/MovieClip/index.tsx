@@ -1,7 +1,5 @@
 import React from "react";
 import { GetMovieClipsDocument } from "@/__generated__/graphql";
-import { useQuery } from "@apollo/client";
-import YouTube from "react-youtube";
 import MovieClipsMenu from "../MovieClipsMenu";
 import { getClient } from "@/lib/client";
 import VideoPLayer from "../VideoPlayer";

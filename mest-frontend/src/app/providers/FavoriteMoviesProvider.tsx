@@ -12,7 +12,9 @@ const FaboriteMoviesProvider = ({
   children: React.ReactNode;
 }) => {
   const { user, isLoading: isLoadingUser } = useUser();
-  const { data, loading } = useQuery(FindAllFavoriteMoviesDocument);
+  const { data, loading } = useQuery(FindAllFavoriteMoviesDocument, {
+    skip: !user,
+  });
 
   const { setFavoriteMovies, setIsLoading } = useFavoriteMoviesStore();
 

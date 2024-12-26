@@ -4,7 +4,6 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { useMutation } from "@apollo/client";
 import {
   CreateFavoriteMovieDocument,
-  MovieType,
   RemoveFavoriteMovieDocument,
 } from "@/__generated__/graphql";
 import { twMerge } from "tailwind-merge";

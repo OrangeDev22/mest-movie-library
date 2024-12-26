@@ -1,4 +1,3 @@
-"use client";
 import dayjs from "dayjs";
 import React from "react";
 import MovieButtons from "../MovieButtons";
