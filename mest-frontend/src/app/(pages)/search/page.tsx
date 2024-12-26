@@ -57,6 +57,7 @@ async function Search({
         page={page}
         paginationLimit={total_pages}
         redirectTo={redirectTo}
+        query={{ searchValue }}
       />
     </div>
   );
