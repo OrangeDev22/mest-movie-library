@@ -44,8 +44,6 @@ export class FavoriteMoviesService {
     const apiMovie = await this.movieService.getOneMovie(
       +newFavoriteMovie.movieId,
     );
-    console.log('--api movie', apiMovie);
-    console.log('--final movie', { ...apiMovie, ...newFavoriteMovie });
     return { ...apiMovie, ...newFavoriteMovie };
   }
 
@@ -85,7 +83,6 @@ export class FavoriteMoviesService {
   }
 
   async remove(id: number) {
-    console.log('--movie id', id);
     return this.prisma.favoriteMovie.delete({ where: { id } });
   }
 }

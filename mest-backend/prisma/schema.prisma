@@ -14,7 +14,7 @@ model FavoriteMovie {
   id          Int      @id @default(autoincrement())
   movieId     String   
   userId      Int
-  user        User     @relation(fields: [userId], references: [id]) // Relation to User
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

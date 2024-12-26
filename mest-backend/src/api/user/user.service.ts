@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
@@ -26,14 +25,14 @@ export class UserService {
     return await this.prisma.user.findUnique({ where: { auth0Id } });
   }
 
-  async update(id: number, updateUserInput: UpdateUserInput) {
+  async update(auth0Id: string, updateUserInput: UpdateUserInput) {
     return await this.prisma.user.update({
-      where: { id },
+      where: { auth0Id },
       data: updateUserInput,
     });
   }
 
-  async remove(id: number) {
-    return await this.prisma.user.delete({ where: { id } });
+  async remove(auth0Id: string) {
+    return await this.prisma.user.delete({ where: { auth0Id } });
   }
 }

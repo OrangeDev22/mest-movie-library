@@ -140,7 +140,7 @@ type Query {
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
-  deleteUser(id: Float!): User!
+  deleteUser: User!
   createFavoriteMovie(createFavoriteMovieInput: CreateFavoriteMovieInput!): CreateFavoriteMovie!
   updateFavoriteMovie(updateFavoriteMovieInput: UpdateFavoriteMovieInput!): FavoriteMovie!
   removeFavoriteMovie(id: Int!): RemoveFavoriteMovie!

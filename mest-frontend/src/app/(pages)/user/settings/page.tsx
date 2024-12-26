@@ -64,7 +64,7 @@ const UserSettingsPage = () => {
         overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
         onRequestClose={() => setIsDeleteModalOpen(false)}
       >
-        <DeleteUserModal />
+        <DeleteUserModal onClose={() => setIsDeleteModalOpen(false)} />
       </ReactModal>
     </div>
   );

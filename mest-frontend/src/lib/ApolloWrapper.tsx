@@ -20,7 +20,6 @@ export function ApolloWrapper({
   accessTokenExpiresAt?: number;
 }) {
   const router = useRouter();
-  const path = usePathname();
   const LOG_OUT_ROUTE = "/api/auth/logout";
 
   if (
