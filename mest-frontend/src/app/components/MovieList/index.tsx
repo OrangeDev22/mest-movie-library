@@ -1,8 +1,8 @@
 import { MovieType } from "@/__generated__/graphql";
 import React from "react";
-import MovieCardSkeleton from "../MovieCardSkeleton";
-import MovieCard from "../MovieCard";
 import { twMerge } from "tailwind-merge";
+import MovieCard from "../MovieCard";
+import MovieCardSkeleton from "../MovieCardSkeleton";
 
 function MovieList({
   data,

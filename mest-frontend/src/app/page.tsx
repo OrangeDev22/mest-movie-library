@@ -1,6 +1,6 @@
 import React from "react";
-import TrendingMovies from "./components/TrendingMovies";
 import TrendingTopMovies from "./components/TrendingTopMovies";
+import TrendingMovies from "./components/TrendingMovies";
 
 function HomePage({
   searchParams,

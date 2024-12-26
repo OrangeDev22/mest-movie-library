@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { passwordSchema } from "./schema";
 import Button from "../Button";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { useUser } from "@auth0/nextjs-auth0/client";
 
 type ChangePasswordFormData = z.infer<typeof passwordSchema>;
 

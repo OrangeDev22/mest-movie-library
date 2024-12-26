@@ -61,7 +61,7 @@ const UserSettingsPage = ({
   };
 
   return (
-    <div className="p-6 max-w-3xl mx-auto bg-gray-800 text-white rounded-lg shadow-md">
+    <div className="p-6 max-w-3xl mx-auto bg-base-100 text-white rounded-lg shadow-md">
       <div className="flex items-center gap-6">
         <div className="rounded-full overflow-hidden border-2 border-gray-500">
           <UserPicture size="md" />

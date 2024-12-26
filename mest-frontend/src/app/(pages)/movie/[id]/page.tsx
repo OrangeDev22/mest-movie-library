@@ -1,9 +1,9 @@
 import React from "react";
 import { GetOneMmovieDocument } from "@/__generated__/graphql";
-import MovieDetailsCard from "@/app/components/MovieDetailsCard";
-import MovieClip from "@/app/components/MovieClip";
-import SimilarMovies from "@/app/components/SimilarMovies";
 import { getClient } from "../../../../../lib/graphql-client";
+import MovieClip from "@/app/components/MovieClip";
+import MovieDetailsCard from "@/app/components/MovieDetailsCard";
+import SimilarMovies from "@/app/components/SimilarMovies";
 
 async function Movie({
   params,

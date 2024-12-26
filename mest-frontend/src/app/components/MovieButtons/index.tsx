@@ -1,7 +1,6 @@
 "use client";
 
 import { useUser } from "@auth0/nextjs-auth0/client";
-import Button from "./Button";
 import { useMutation } from "@apollo/client";
 import {
   CreateFavoriteMovieDocument,
@@ -9,8 +8,9 @@ import {
   RemoveFavoriteMovieDocument,
 } from "@/__generated__/graphql";
 import { twMerge } from "tailwind-merge";
-import useFavoriteMoviesStore from "../stores/favoriteMoviesStores";
 import { useEffect, useState } from "react";
+import useFavoriteMoviesStore from "@/app/stores/favoriteMoviesStores";
+import Button from "../Button";
 
 const MovieButtons = ({
   id,
