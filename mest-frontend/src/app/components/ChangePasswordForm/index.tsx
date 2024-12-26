@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { passwordSchema } from "./schema";
 import Button from "../Button";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 type ChangePasswordFormData = z.infer<typeof passwordSchema>;
 
@@ -18,7 +19,22 @@ const ChangePasswordForm = ({ onClose }: { onClose: () => void }) => {
   });
 
   const onFormSubmit = async (data: ChangePasswordFormData) => {
-    // onSubmit(data.newPassword);
+    if (data.confirmPassword !== data.newPassword) return;
+
+    const response = await fetch("/api/auth/update-password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        newPassword: data.newPassword,
+      }),
+    });
+    if (response.ok) {
+      onClose();
+    } else {
+      console.error("Failed to update password");
+    }
   };
 
   return (

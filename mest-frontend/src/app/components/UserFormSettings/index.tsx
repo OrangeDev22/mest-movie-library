@@ -40,13 +40,12 @@ const UserSettingsPage = ({
 
   const onSubmit = async (data: UserSettingsFormData) => {
     try {
-      const response = await fetch("/api/updateUser", {
+      const response = await fetch("/api/user/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: user?.sub,
           ...data,
         }),
       });
