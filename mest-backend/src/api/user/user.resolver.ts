@@ -12,27 +12,30 @@ export class UserResolver {
 
   @Mutation(() => User, { name: 'createUser' })
   @UseGuards(AuthGuard)
-  create(@Args('createUserInput') createUserInput: CreateUserInput) {
-    return this.userService.create(createUserInput as any);
+  create(
+    @Args('createUserInput') createUserInput: CreateUserInput,
+    @Context() context: { auth0Id: string },
+  ) {
+    return this.userService.create(createUserInput as any, context.auth0Id);
   }
 
-  @Query(() => [User])
+  // @Query(() => [User])
   // @UseGuards(AuthGuard)
-  getAllUsers() {
-    return this.userService.findAll();
-  }
+  // getAllUsers() {
+  //   return this.userService.findAll();
+  // }
 
   @Query(() => User)
   @UseGuards(AuthGuard)
-  getOneUser(@Args('id') id: number) {
-    return this.userService.findOne(id);
+  getOneUser(@Context() context: { auth0Id: string }) {
+    return this.userService.findOne(context.auth0Id);
   }
 
-  @Query(() => User)
-  @UseGuards(AuthGuard)
-  getOneByAuth0IdUser(@Args('authId') authId: string) {
-    return this.userService.findOneByAuth0Id(authId);
-  }
+  // @Query(() => User)
+  // @UseGuards(AuthGuard)
+  // getOneByAuth0IdUser(@Args('authId') authId: string) {
+  //   return this.userService.findOneByAuth0Id(authId);
+  // }
 
   @Mutation(() => User)
   @UseGuards(AuthGuard)

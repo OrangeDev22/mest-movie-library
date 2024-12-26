@@ -7,23 +7,23 @@ import { Prisma } from '@prisma/client';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: Prisma.UserCreateInput) {
+  async create(data: Prisma.UserCreateInput, auth0Id: string) {
     return await this.prisma.user.create({
-      data,
+      data: { ...data, auth0Id },
     });
   }
 
-  async findAll() {
-    return await this.prisma.user.findMany();
-  }
+  // async findAll() {
+  //   return await this.prisma.user.findMany();
+  // }
 
-  async findOne(id: number) {
-    return await this.prisma.user.findUnique({ where: { id } });
-  }
-
-  async findOneByAuth0Id(auth0Id: string) {
+  async findOne(auth0Id: string) {
     return await this.prisma.user.findUnique({ where: { auth0Id } });
   }
+
+  // async findOneByAuth0Id(auth0Id: string) {
+  //   return await this.prisma.user.findUnique({ where: { auth0Id } });
+  // }
 
   async update(auth0Id: string, updateUserInput: UpdateUserInput) {
     return await this.prisma.user.update({

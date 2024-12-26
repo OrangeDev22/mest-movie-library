@@ -4,7 +4,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import {
   CreateUserDocument,
-  GetOneByAuth0IdUserDocument,
+  GetOneUserDocument,
   UpdateUserDocument,
 } from "@/__generated__/graphql";
 import { checkUserIsSync } from "@/utils";
@@ -12,25 +12,20 @@ import { checkUserIsSync } from "@/utils";
 const UserAuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { user, isLoading } = useUser();
 
-  const { data, loading, error, refetch } = useQuery(
-    GetOneByAuth0IdUserDocument,
-    {
-      variables: { authId: user?.sub ?? "auth0|67560bd505921aeb3737847e" },
-      skip: !user?.sub,
-    }
-  );
+  const { data, loading, error, refetch } = useQuery(GetOneUserDocument, {
+    skip: !user?.sub,
+  });
 
   const [createUser] = useMutation(CreateUserDocument);
   const [updateUser] = useMutation(UpdateUserDocument);
 
   useEffect(() => {
-    if (isLoading || !user || data?.getOneByAuth0IdUser) return;
+    if (isLoading || !user || data?.getOneUser) return;
 
-    if (!data?.getOneByAuth0IdUser && !loading && user.sub) {
+    if (!data?.getOneUser && !loading && user.sub) {
       createUser({
         variables: {
           createUserInput: {
-            auth0Id: user.sub,
             email: user.email || "",
             name: user.name || "",
             nickName: user.nickname || "",
@@ -46,15 +41,15 @@ const UserAuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [user, data, loading, isLoading, refetch]);
 
   useEffect(() => {
-    if (!data?.getOneByAuth0IdUser || !user) return;
+    if (!data?.getOneUser || !user) return;
 
-    const isUserSyncUp = checkUserIsSync(data.getOneByAuth0IdUser, user);
+    const isUserSyncUp = checkUserIsSync(data?.getOneUser, user);
 
     if (!isUserSyncUp) {
       updateUser({
         variables: {
           updateUserInput: {
-            id: data.getOneByAuth0IdUser.id,
+            id: data?.getOneUser.id,
             email: user.email,
             name: user.name,
             nickName: user.nickname,

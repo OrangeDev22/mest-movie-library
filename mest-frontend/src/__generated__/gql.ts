@@ -19,8 +19,7 @@ const documents = {
     "query FindAllFavoriteMovies {\n  favoriteMovies {\n    id\n    movieId\n    title\n    poster_path\n  }\n}": types.FindAllFavoriteMoviesDocument,
     "query GetMovieClips($getMovieClipsId: ID!) {\n  getMovieClips(id: $getMovieClipsId) {\n    id\n    name\n    key\n    site\n    size\n    type\n    official\n    published_at\n  }\n}": types.GetMovieClipsDocument,
     "query GetOneMmovie($getOneMmovieId: ID!) {\n  getOneMmovie(id: $getOneMmovieId) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n    production_companies {\n      id\n      name\n    }\n    genres {\n      id\n      name\n    }\n  }\n}": types.GetOneMmovieDocument,
-    "query GetOneUser($id: Float!) {\n  getOneUser(id: $id) {\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}": types.GetOneUserDocument,
-    "query GetOneByAuth0IdUser($authId: String!) {\n  getOneByAuth0IdUser(authId: $authId) {\n    auth0Id\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}": types.GetOneByAuth0IdUserDocument,
+    "query GetOneUser {\n  getOneUser {\n    id\n    nickName\n    name\n    email\n    auth0Id\n    createdAt\n    updatedAt\n  }\n}": types.GetOneUserDocument,
     "query GetSimilarMovies($getSimilarMoviesId: ID!) {\n  getSimilarMovies(id: $getSimilarMoviesId) {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}": types.GetSimilarMoviesDocument,
     "query GetTopTrendingMovies {\n  getTopTrendingMovies {\n    id\n    adult\n    backdrop_path\n    title\n    original_language\n    original_title\n    overview\n    poster_path\n    media_type\n    genre_ids\n    popularity\n    release_date\n    video\n    vote_average\n    vote_count\n  }\n}": types.GetTopTrendingMoviesDocument,
     "query GetTrendingMovies($page: Float!) {\n  getTrendingMovies(page: $page) {\n    movies {\n      id\n      adult\n      backdrop_path\n      title\n      original_language\n      original_title\n      overview\n      poster_path\n      media_type\n      genre_ids\n      popularity\n      release_date\n      video\n      vote_average\n      vote_count\n    }\n    total_pages\n  }\n}": types.GetTrendingMoviesDocument,
@@ -70,11 +69,7 @@ export function graphql(source: "query GetOneMmovie($getOneMmovieId: ID!) {\n  g
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query GetOneUser($id: Float!) {\n  getOneUser(id: $id) {\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}"): (typeof documents)["query GetOneUser($id: Float!) {\n  getOneUser(id: $id) {\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "query GetOneByAuth0IdUser($authId: String!) {\n  getOneByAuth0IdUser(authId: $authId) {\n    auth0Id\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}"): (typeof documents)["query GetOneByAuth0IdUser($authId: String!) {\n  getOneByAuth0IdUser(authId: $authId) {\n    auth0Id\n    id\n    nickName\n    name\n    email\n    createdAt\n    updatedAt\n  }\n}"];
+export function graphql(source: "query GetOneUser {\n  getOneUser {\n    id\n    nickName\n    name\n    email\n    auth0Id\n    createdAt\n    updatedAt\n  }\n}"): (typeof documents)["query GetOneUser {\n  getOneUser {\n    id\n    nickName\n    name\n    email\n    auth0Id\n    createdAt\n    updatedAt\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

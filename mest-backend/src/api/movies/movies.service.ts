@@ -76,7 +76,7 @@ export class MoviesService {
             return response.data.results;
           }),
           catchError((error) => {
-            console.log('--error', error.message);
+            console.error('--error', error.message);
             return throwError(
               () => new HttpException(JSON.stringify(error.message), 400),
             );
@@ -108,7 +108,7 @@ export class MoviesService {
             };
           }),
           catchError((error) => {
-            console.log('--error', error.message);
+            console.error('--error', error.message);
             return throwError(
               () => new HttpException(JSON.stringify(error.message), 400),
             );
@@ -138,7 +138,7 @@ export class MoviesService {
             };
           }),
           catchError((error) => {
-            console.log('--error', error.message);
+            console.error('--error', error.message);
             return throwError(
               () => new HttpException(JSON.stringify(error.message), 400),
             );
@@ -161,7 +161,7 @@ export class MoviesService {
             return response.data.results as MovieType[];
           }),
           catchError((error) => {
-            console.log('--error', error.message);
+            console.error('--error', error.message);
             return throwError(
               () => new HttpException(JSON.stringify(error.message), 400),
             );

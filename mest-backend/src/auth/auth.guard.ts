@@ -42,21 +42,14 @@ export class AuthGuard implements CanActivate {
         algorithms: ['RS256'],
       }),
     );
-    // const checkJwt = promisify(
-    //   jwt({
-    //     secret: 'I guess secret?',
-    //     audience: this.AUTH0_AUDIENCE,
-    //     issuer: this.AUTH0_DOMAIN,
-    //     algorithms: ['RS256'],
-    //   }),
-    // );
+
     try {
       await checkJwt(req, res);
 
       ctx.getContext().auth0Id = req.auth?.sub;
       return true;
     } catch (error) {
-      console.log('ERROR', error);
+      console.error('ERROR', error);
       throw new UnauthorizedException(error);
     }
   }

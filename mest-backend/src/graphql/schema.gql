@@ -130,9 +130,7 @@ type Query {
   getTopTrendingMovies: [MovieType!]!
   getMovieClips(id: ID!): [MovieClip!]!
   getMovieCast(id: Int!): [CastMember!]!
-  getAllUsers: [User!]!
-  getOneUser(id: Float!): User!
-  getOneByAuth0IdUser(authId: String!): User!
+  getOneUser: User!
   favoriteMovies: [FavoriteMovie!]!
   favoriteMovie(id: Int!): FavoriteMovie!
 }
@@ -147,14 +145,12 @@ type Mutation {
 }
 
 input CreateUserInput {
-  auth0Id: String!
   nickName: String!
   name: String!
   email: String!
 }
 
 input UpdateUserInput {
-  auth0Id: String
   nickName: String
   name: String
   email: String
