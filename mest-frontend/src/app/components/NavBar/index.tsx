@@ -11,13 +11,11 @@ function Navbar() {
         <div className="text-lg font-bold">MEST</div>
       </Link>
 
-      <div className="w-full self-center grow px-4">
+      <div className="self-center grow px-4">
         <SearchInput />
       </div>
 
-      <div className="">
-        <UserNavBarItems />
-      </div>
+      <UserNavBarItems />
     </nav>
   );
 }
