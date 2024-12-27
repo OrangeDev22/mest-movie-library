@@ -33,11 +33,12 @@ export function ApolloWrapper({
   const makeClient = () => {
     const httpLink = new HttpLink({
       uri: process.env.MEST_BACKEND_URL,
+      credentials: "include",
       headers: {
-        authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
       },
     });
-
     return new NextSSRApolloClient({
       cache: new NextSSRInMemoryCache(),
       link:

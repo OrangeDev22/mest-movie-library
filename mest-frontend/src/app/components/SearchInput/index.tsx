@@ -12,11 +12,12 @@ function SearchInput() {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
-  const { data, refetch, loading } = useQuery(SearchMovieDocument, {
+  const { data, refetch, loading, error } = useQuery(SearchMovieDocument, {
     variables: { search: "" },
     skip: !isFocused,
   });
-
+  console.log("--data", data);
+  console.log("--error", error);
   const handleInputChange = async (value: string) => {
     if (value !== undefined) await refetch({ search: value });
   };

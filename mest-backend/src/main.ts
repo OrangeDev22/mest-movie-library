@@ -9,13 +9,13 @@ async function bootstrap() {
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
     allowedHeaders: [
+      'Content-Type',
+      'Authorization',
       'x-api-key',
-      'authorization',
       'Cache-Control',
-      'content-type',
     ],
   });
 
-  await app.listen(8000);
+  await app.listen(process.env.PORT || 8000);
 }
 bootstrap();
