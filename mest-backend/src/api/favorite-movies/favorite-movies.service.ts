@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { CreateFavoriteMovieInput } from './dto/create-favorite-movie.input';
 import { UpdateFavoriteMovieInput } from './dto/update-favorite-movie.input';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { MoviesService } from '../movies/movies.service';
 
 @Injectable()
