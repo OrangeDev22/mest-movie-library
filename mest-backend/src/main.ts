@@ -1,21 +1,26 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+// let allowCrossDomain = function (_req: any, res: any, next: any) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'x-api-key,authorization,Cache-Control,content-type',
+//   );
 
+//   next();
+// };
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule, { cors: true });
+  // app.use(allowCrossDomain);
   app.enableCors({
-    origin: [''],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: ['content-type'],
+    origin: 'http://localhost:3000',
     credentials: true,
-    allowedHeaders: [
-      'Content-Type',
-      'Authorization',
-      'x-api-key',
-      'Cache-Control',
-    ],
   });
 
-  await app.listen(process.env.PORT || 8000);
+  await app.listen(8000);
 }
 bootstrap();
