@@ -33,7 +33,6 @@ export function ApolloWrapper({
   const makeClient = () => {
     const httpLink = new HttpLink({
       uri: process.env.MEST_BACKEND_URL,
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
