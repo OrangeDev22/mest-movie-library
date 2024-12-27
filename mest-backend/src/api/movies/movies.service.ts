@@ -115,7 +115,7 @@ export class MoviesService {
           }),
         ),
     );
-    console.log('--data', data.movies);
+
     return {
       ...data,
       movies: data?.movies ? this.remapDataWithImages(data.movies) : [],

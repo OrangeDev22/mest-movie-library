@@ -29,7 +29,7 @@ export function ApolloWrapper({
     router.push(LOG_OUT_ROUTE);
     return null;
   }
-  console.log("--backend url", process.env.MEST_BACKEND_URL);
+
   const makeClient = () => {
     const httpLink = new HttpLink({
       uri: process.env.MEST_BACKEND_URL,
