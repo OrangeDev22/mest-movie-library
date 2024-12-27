@@ -4,9 +4,9 @@ import { FavoriteMovie } from './entities/favorite-movie.entity';
 import { CreateFavoriteMovieInput } from './dto/create-favorite-movie.input';
 import { UpdateFavoriteMovieInput } from './dto/update-favorite-movie.input';
 import { UseGuards } from '@nestjs/common';
-import { AuthGuard } from 'src/auth/auth.guard';
 import { CreateFavoriteMovie } from './entities/create-favorite-movie.entity';
 import { RemoveFavoriteMovie } from './entities/remove-favorite-movie';
+import { AuthGuard } from '../../auth/auth.guard';
 
 @Resolver(() => FavoriteMovie)
 export class FavoriteMoviesResolver {

@@ -1,6 +1,5 @@
 import { ObjectType, Field, Int, PickType } from '@nestjs/graphql';
-import { title } from 'process';
-import { MovieType } from 'src/api/movies/entities/movie.entity';
+import { MovieType } from '../../movies/entities/movie.entity';
 
 @ObjectType()
 export class FavoriteMovie extends PickType(MovieType, [

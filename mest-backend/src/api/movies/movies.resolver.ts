@@ -4,8 +4,6 @@ import { MovieType } from './entities/movie.entity';
 import { MovieClip } from './entities/movieClip.entity';
 import { CastMember } from './entities/castMember';
 import { MovieResponseType } from './entities/movie.response';
-import { UseGuards } from '@nestjs/common/decorators';
-import { AuthGuard } from 'src/auth/auth.guard';
 import { MovieSearchResponse } from './entities/movieSearch.response';
 
 @Resolver()
