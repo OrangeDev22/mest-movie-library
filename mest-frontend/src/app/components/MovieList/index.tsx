@@ -3,6 +3,7 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 import MovieCard from "../MovieCard";
 import MovieCardSkeleton from "../MovieCardSkeleton";
+import Link from "next/link";
 
 function MovieList({
   data,
@@ -32,7 +33,17 @@ function MovieList({
     );
   }
 
-  if (!data) return null;
+  if (!data || data?.length === 0) {
+    return (
+      <div className="w-full text-lg text-center max-w-md mx-auto py-10">
+        You currently don't have any favorite movies, go to the{" "}
+        <Link href="/" className="text-cyan-500 font-bold">
+          home
+        </Link>{" "}
+        page and look for your favorite movies!
+      </div>
+    );
+  }
 
   return (
     <div

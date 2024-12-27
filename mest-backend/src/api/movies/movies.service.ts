@@ -115,8 +115,11 @@ export class MoviesService {
           }),
         ),
     );
-
-    return { ...data, movies: this.remapDataWithImages(data.movies) };
+    console.log('--data', data.movies);
+    return {
+      ...data,
+      movies: data?.movies ? this.remapDataWithImages(data.movies) : [],
+    };
   }
 
   async getTrendingMovies(page: number): Promise<MovieSearchResponse> {
