@@ -16,8 +16,7 @@ function SearchInput() {
     variables: { search: "" },
     skip: !isFocused,
   });
-  console.log("--data", data);
-  console.log("--error", error);
+
   const handleInputChange = async (value: string) => {
     if (value !== undefined) await refetch({ search: value });
   };
