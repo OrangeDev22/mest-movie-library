@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { MoviesModule } from './api/movies/movies.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { join } from 'path';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
