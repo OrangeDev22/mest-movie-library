@@ -22,9 +22,9 @@ function MovieList({
           rootClassName
         )}
       >
-        {new Array(20).fill(null).map(() => {
+        {new Array(20).fill(null).map((_, index) => {
           return (
-            <div className="w-full h-full">
+            <div className="w-full h-full" key={index}>
               <MovieCardSkeleton />
             </div>
           );
