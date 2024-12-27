@@ -1,12 +1,11 @@
 import { getAccessToken, getSession } from "@auth0/nextjs-auth0";
 import axios from "axios";
-import { NextApiRequest, NextApiResponse } from "next";
 import { getManagementApiToken } from "../../utils";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN;
 
-export async function POST(req: NextApiRequest) {
+export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
 

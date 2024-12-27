@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import { getSession, updateSession } from "@auth0/nextjs-auth0";
 import { getManagementApiToken } from "../../utils";
@@ -6,7 +5,7 @@ import { NextResponse } from "next/server";
 
 const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN;
 
-export async function POST(req: NextApiRequest) {
+export async function POST() {
   const session = await getSession();
 
   if (!session) {
