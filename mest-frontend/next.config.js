@@ -10,6 +10,7 @@ const nextConfig = {
     unoptimized: true,
     domains: ["s.gravatar.com"],
   },
+  target: "serveless",
 };
 
 module.exports = nextConfig;
