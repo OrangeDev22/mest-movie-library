@@ -97,7 +97,7 @@ export type MovieResponseType = {
   original_language: Scalars['String']['output'];
   original_title: Scalars['String']['output'];
   overview: Scalars['String']['output'];
-  popularity: Scalars['Float']['output'];
+  popularity?: Maybe<Scalars['Float']['output']>;
   poster_path: Scalars['String']['output'];
   production_companies?: Maybe<Array<ProductionCompany>>;
   release_date: Scalars['String']['output'];
@@ -123,7 +123,7 @@ export type MovieType = {
   original_language: Scalars['String']['output'];
   original_title: Scalars['String']['output'];
   overview: Scalars['String']['output'];
-  popularity: Scalars['Float']['output'];
+  popularity?: Maybe<Scalars['Float']['output']>;
   poster_path: Scalars['String']['output'];
   release_date: Scalars['String']['output'];
   title: Scalars['String']['output'];
@@ -287,7 +287,7 @@ export type GetOneMmovieQueryVariables = Exact<{
 }>;
 
 
-export type GetOneMmovieQuery = { __typename?: 'Query', getOneMmovie: { __typename?: 'MovieResponseType', id: string, adult: boolean, backdrop_path: string, title: string, original_language: string, original_title: string, overview: string, poster_path: string, media_type: string, genre_ids?: Array<string> | null, popularity: number, release_date: string, video: boolean, vote_average: number, vote_count: number, production_companies?: Array<{ __typename?: 'ProductionCompany', id: string, name: string }> | null, genres?: Array<{ __typename?: 'Genre', id: string, name: string }> | null } };
+export type GetOneMmovieQuery = { __typename?: 'Query', getOneMmovie: { __typename?: 'MovieResponseType', id: string, adult: boolean, backdrop_path: string, title: string, original_language: string, original_title: string, overview: string, poster_path: string, media_type: string, genre_ids?: Array<string> | null, popularity?: number | null, release_date: string, video: boolean, vote_average: number, vote_count: number, production_companies?: Array<{ __typename?: 'ProductionCompany', id: string, name: string }> | null, genres?: Array<{ __typename?: 'Genre', id: string, name: string }> | null } };
 
 export type GetOneUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -299,19 +299,19 @@ export type GetSimilarMoviesQueryVariables = Exact<{
 }>;
 
 
-export type GetSimilarMoviesQuery = { __typename?: 'Query', getSimilarMovies: Array<{ __typename?: 'MovieType', id: string, adult: boolean, backdrop_path: string, title: string, original_language: string, original_title: string, overview: string, poster_path: string, media_type: string, genre_ids?: Array<string> | null, popularity: number, release_date: string, video: boolean, vote_average: number, vote_count: number }> };
+export type GetSimilarMoviesQuery = { __typename?: 'Query', getSimilarMovies: Array<{ __typename?: 'MovieType', id: string, adult: boolean, backdrop_path: string, title: string, original_language: string, original_title: string, overview: string, poster_path: string, media_type: string, genre_ids?: Array<string> | null, popularity?: number | null, release_date: string, video: boolean, vote_average: number, vote_count: number }> };
 
 export type GetTopTrendingMoviesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTopTrendingMoviesQuery = { __typename?: 'Query', getTopTrendingMovies: Array<{ __typename?: 'MovieType', id: string, adult: boolean, backdrop_path: string, title: string, original_language: string, original_title: string, overview: string, poster_path: string, media_type: string, genre_ids?: Array<string> | null, popularity: number, release_date: string, video: boolean, vote_average: number, vote_count: number }> };
+export type GetTopTrendingMoviesQuery = { __typename?: 'Query', getTopTrendingMovies: Array<{ __typename?: 'MovieType', id: string, adult: boolean, backdrop_path: string, title: string, original_language: string, original_title: string, overview: string, poster_path: string, media_type: string, genre_ids?: Array<string> | null, popularity?: number | null, release_date: string, video: boolean, vote_average: number, vote_count: number }> };
 
 export type GetTrendingMoviesQueryVariables = Exact<{
   page: Scalars['Float']['input'];
 }>;
 
 
-export type GetTrendingMoviesQuery = { __typename?: 'Query', getTrendingMovies: { __typename?: 'MovieSearchResponse', total_pages: number, movies: Array<{ __typename?: 'MovieType', id: string, adult: boolean, backdrop_path: string, title: string, original_language: string, original_title: string, overview: string, poster_path: string, media_type: string, genre_ids?: Array<string> | null, popularity: number, release_date: string, video: boolean, vote_average: number, vote_count: number }> } };
+export type GetTrendingMoviesQuery = { __typename?: 'Query', getTrendingMovies: { __typename?: 'MovieSearchResponse', total_pages: number, movies: Array<{ __typename?: 'MovieType', id: string, adult: boolean, backdrop_path: string, title: string, original_language: string, original_title: string, overview: string, poster_path: string, media_type: string, genre_ids?: Array<string> | null, popularity?: number | null, release_date: string, video: boolean, vote_average: number, vote_count: number }> } };
 
 export type RemoveFavoriteMovieMutationVariables = Exact<{
   removeFavoriteMovieId: Scalars['Int']['input'];
@@ -326,7 +326,7 @@ export type SearchMovieQueryVariables = Exact<{
 }>;
 
 
-export type SearchMovieQuery = { __typename?: 'Query', searchMovie: { __typename?: 'MovieSearchResponse', total_pages: number, movies: Array<{ __typename?: 'MovieType', id: string, adult: boolean, backdrop_path: string, title: string, original_language: string, original_title: string, overview: string, poster_path: string, media_type: string, genre_ids?: Array<string> | null, popularity: number, release_date: string, video: boolean, vote_average: number, vote_count: number }> } };
+export type SearchMovieQuery = { __typename?: 'Query', searchMovie: { __typename?: 'MovieSearchResponse', total_pages: number, movies: Array<{ __typename?: 'MovieType', id: string, adult: boolean, backdrop_path: string, title: string, original_language: string, original_title: string, overview: string, poster_path: string, media_type: string, genre_ids?: Array<string> | null, popularity?: number | null, release_date: string, video: boolean, vote_average: number, vote_count: number }> } };
 
 export type UpdateUserMutationVariables = Exact<{
   updateUserInput: UpdateUserInput;

@@ -8,42 +8,42 @@ export class MovieType {
   @Field()
   adult: boolean;
 
-  @Field()
+  @Field({ defaultValue: '' })
   backdrop_path: string;
 
-  @Field()
+  @Field({ defaultValue: '' })
   title: string;
 
-  @Field()
+  @Field({ defaultValue: '' })
   original_language: string;
 
-  @Field()
+  @Field({ defaultValue: '' })
   original_title: string;
 
-  @Field()
+  @Field({ defaultValue: '' })
   overview: string;
 
   @Field()
   poster_path: string;
 
-  @Field()
+  @Field({ defaultValue: '' })
   media_type: string;
 
   @Field(() => [ID], { nullable: true })
   genre_ids: number[];
 
-  @Field()
-  popularity: number;
+  @Field({ nullable: true })
+  popularity?: number;
 
-  @Field()
-  release_date: string;
+  @Field({ nullable: true })
+  release_date?: string;
 
-  @Field()
+  @Field({ defaultValue: false })
   video: boolean;
 
-  @Field()
+  @Field({ defaultValue: 0 })
   vote_average: number;
 
-  @Field()
+  @Field({ defaultValue: 0 })
   vote_count: number;
 }

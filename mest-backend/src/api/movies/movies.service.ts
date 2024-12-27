@@ -108,14 +108,13 @@ export class MoviesService {
             };
           }),
           catchError((error) => {
-            console.error('--error', error.message);
             return throwError(
               () => new HttpException(JSON.stringify(error.message), 400),
             );
           }),
         ),
     );
-
+    console.log('--data', data);
     return {
       ...data,
       movies: data?.movies ? this.remapDataWithImages(data.movies) : [],
