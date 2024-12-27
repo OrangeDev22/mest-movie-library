@@ -5,8 +5,8 @@ import UserNavBarItems from "../UserNavBarItems";
 
 function Navbar() {
   return (
-    <nav className="bg-navbar flex justify-between items-center py-3 px-3 lg:px-24 text-white gap-3 relative">
-      <Link href="/" className="flex gap-1 items-center">
+    <nav className="bg-navbar flex justify-between items-center py-3 px-3 lg:px-24 text-white md:gap-3 relative">
+      <Link href="/" className="flex gap-1 items-center min-w-[91px]">
         <img src="/logo.png" alt="Logo" className="h-8" />
         <div className="text-lg font-bold">MEST</div>
       </Link>
