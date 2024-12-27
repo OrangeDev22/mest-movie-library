@@ -21,7 +21,7 @@ import { FavoriteMoviesModule } from './api/favorite-movies/favorite-movies.modu
     MoviesModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), './src/graphql/schema.gql'),
+      autoSchemaFile: true,
       playground: false,
       context: ({ req }) => ({ ...req }),
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
