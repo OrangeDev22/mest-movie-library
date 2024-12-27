@@ -6,6 +6,6 @@ export const GET = handleAuth({
       scope:
         "openid profile email update:users read:current_user update:users_app_metadata update:current_user_metadata",
     },
-    returnTo: "/",
+    returnTo: "/?page=1",
   }),
 });
