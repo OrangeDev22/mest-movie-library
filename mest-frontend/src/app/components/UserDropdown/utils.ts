@@ -1,12 +1,12 @@
 export const getUserDropdownItems = () => {
   return [
     {
-      text: "Settings",
-      url: "/user/settings",
-    },
-    {
       text: "Favorite Movies",
       url: "/favorites",
+    },
+    {
+      text: "Settings",
+      url: "/user/settings",
     },
     {
       text: "Logout",
