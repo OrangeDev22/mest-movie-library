@@ -20,8 +20,8 @@ const UserCard = ({ user, isLoading, onButtonClick }: UserCardProps) => {
             <div className="rounded-full overflow-hidden border-2 border-gray-500">
               <UserPicture
                 size="md"
-                className="w-10 h-10 sm:w-24 sm:h-24"
-                containerClassName="w-10 h-10 sm:w-24 sm:h-24"
+                className="w-16 h-16 sm:w-24 sm:h-24"
+                containerClassName="w-16 h-16 sm:w-24 sm:h-24"
               />
             </div>
             <div className="">
