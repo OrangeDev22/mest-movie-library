@@ -18,10 +18,14 @@ const UserCard = ({ user, isLoading, onButtonClick }: UserCardProps) => {
         <div className="flex gap-3 flex-col sm:flex-row items-start sm:items-center w-full">
           <div className="flex gap-3 items-center">
             <div className="rounded-full overflow-hidden border-2 border-gray-500">
-              <UserPicture size="md" />
+              <UserPicture
+                size="md"
+                className="w-10 h-10 sm:w-24 sm:h-24"
+                containerClassName="w-10 h-10 sm:w-24 sm:h-24"
+              />
             </div>
             <div className="">
-              <div className="text-2xl font-semibold">{user?.name}</div>
+              <div className="md:text-2xl font-semibold">{user?.name}</div>
             </div>
           </div>
           <div className="text-center ml-auto w-full sm:w-auto">

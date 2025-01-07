@@ -4,11 +4,16 @@ import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface UserPictureProps {
+  containerClassName?: string;
   className?: string;
   size: "sm" | "md";
 }
 
-const UserPicture = ({ className, size = "md" }: UserPictureProps) => {
+const UserPicture = ({
+  className,
+  containerClassName,
+  size = "md",
+}: UserPictureProps) => {
   const { user, isLoading } = useUser();
 
   if (isLoading)
@@ -23,7 +28,12 @@ const UserPicture = ({ className, size = "md" }: UserPictureProps) => {
     );
 
   return (
-    <div className={size === "md" ? "w-24 h-24" : "w-10 h-10"}>
+    <div
+      className={twMerge(
+        size === "md" ? "w-24 h-24" : "w-10 h-10",
+        containerClassName
+      )}
+    >
       <Image
         src={user?.picture || "/default-avatar.png"}
         alt="user_profile_pic"
