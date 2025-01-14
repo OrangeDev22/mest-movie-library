@@ -1,19 +1,22 @@
 import React from "react";
-import { GetOneMmovieDocument } from "@/__generated__/graphql";
+import {
+  GetOneMmovieDocument,
+  GetTrendingMoviesDocument,
+} from "@/__generated__/graphql";
 import { getClient } from "../../../../../lib/graphql-client";
 import MovieClip from "@/app/components/MovieClip";
 import MovieDetailsCard from "@/app/components/MovieDetailsCard";
 import SimilarMovies from "@/app/components/SimilarMovies";
+import { notFound } from "next/navigation";
 
-async function Movie({
-  params,
-  searchParams,
-}: {
+interface Params {
   params: {
     id: string;
   };
   searchParams: { [key: string]: string | string[] | undefined };
-}) {
+}
+
+async function Movie({ params, searchParams }: Params) {
   const { data } = await getClient().query({
     query: GetOneMmovieDocument,
     variables: { getOneMmovieId: params.id },
@@ -37,6 +40,8 @@ async function Movie({
       production_companies,
     },
   } = data;
+  console.log("--not found", data.getOneMmovie);
+  if (!data.getOneMmovie) return notFound();
 
   return (
     <div className="flex flex-col space-y-4">
@@ -65,6 +70,35 @@ async function Movie({
       </div>
     </div>
   );
+}
+
+export async function generateMetadata({ params }: Params) {
+  const { data } = await getClient().query({
+    query: GetOneMmovieDocument,
+    variables: { getOneMmovieId: params.id },
+  });
+
+  if (!data.getOneMmovie.title) {
+    return {
+      title: "Movie Not Found",
+    };
+  }
+
+  return {
+    title: data.getOneMmovie.title,
+    description: `This is the page of movie ${data.getOneMmovie.title}`,
+  };
+}
+
+export async function generateStaticParams() {
+  const { data } = await getClient().query({
+    query: GetTrendingMoviesDocument,
+    variables: { page: 1 },
+  });
+
+  return data?.getTrendingMovies?.movies.map((movie) => ({
+    id: movie?.id,
+  }));
 }
 
 export default Movie;

@@ -2,6 +2,8 @@ import React from "react";
 import TrendingTopMovies from "./components/TrendingTopMovies";
 import TrendingMovies from "./components/TrendingMovies";
 
+export const revalidate = 86400;
+
 function HomePage({
   searchParams,
 }: {
