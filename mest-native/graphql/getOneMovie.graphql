@@ -1,0 +1,27 @@
+query GetOneMmovie($getOneMmovieId: ID!) {
+  getOneMmovie(id: $getOneMmovieId) {
+    id
+    adult
+    backdrop_path
+    title
+    original_language
+    original_title
+    overview
+    poster_path
+    media_type
+    genre_ids
+    popularity
+    release_date
+    video
+    vote_average
+    vote_count
+    production_companies {
+      id
+      name
+    }
+    genres {
+      id
+      name
+    }
+  }
+}

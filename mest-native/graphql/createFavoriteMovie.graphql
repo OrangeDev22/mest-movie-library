@@ -1,0 +1,10 @@
+mutation CreateFavoriteMovie(
+  $createFavoriteMovieInput: CreateFavoriteMovieInput!
+) {
+  createFavoriteMovie(createFavoriteMovieInput: $createFavoriteMovieInput) {
+    id
+    movieId
+    poster_path
+    title
+  }
+}

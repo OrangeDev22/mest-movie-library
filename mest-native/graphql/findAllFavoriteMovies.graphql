@@ -1,0 +1,8 @@
+query FindAllFavoriteMovies {
+  favoriteMovies {
+    id
+    movieId
+    title
+    poster_path
+  }
+}

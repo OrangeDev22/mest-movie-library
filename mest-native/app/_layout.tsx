@@ -1,6 +1,12 @@
 import { Stack } from "expo-router";
 import "../global.css";
+import { ApolloProvider } from "@apollo/client";
+import client from "@/graphql/client";
 
 export default function RootLayout() {
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <ApolloProvider client={client}>
+      <Stack screenOptions={{ headerShown: false }} />
+    </ApolloProvider>
+  );
 }

@@ -1,0 +1,11 @@
+query GetOneUser {
+  getOneUser {
+    id
+    nickName
+    name
+    email
+    auth0Id
+    createdAt
+    updatedAt
+  }
+}
