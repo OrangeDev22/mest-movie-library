@@ -1,5 +1,6 @@
 import { GetTrendingMoviesDocument } from "@/__generated__/graphql";
 import MovieCard from "@/components/ui/MovieCard";
+import MovieList from "@/components/ui/MovieList";
 import { useQuery } from "@apollo/client";
 import { StatusBar } from "expo-status-bar";
 import { ScrollView, Text, View } from "react-native";
@@ -11,15 +12,12 @@ export default function Index() {
   });
 
   return (
-    <SafeAreaView className="h-full">
-      <ScrollView className="h-full">
-        <View className="flex-1 items-center justify-center  bg-background-primary text-white gap-10">
-          {data?.getTrendingMovies.movies.map((movie) => (
-            <MovieCard movie={movie} key={movie.id} />
-          ))}
-          <StatusBar style="dark" />
-        </View>
-      </ScrollView>
+    <SafeAreaView className="h-full  bg-background-primary">
+      <View className="items-center p-4 justify-center   text-white">
+        <MovieList data={data} />
+        <StatusBar style="dark" />
+      </View>
+
       <StatusBar backgroundColor="black" />
     </SafeAreaView>
   );

@@ -18,35 +18,19 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
   };
 
   return (
-    <View className="w-full rounded-lg max-w-2xs card card-compact bg-base-100 shadow-xl">
-      <Pressable onPress={handlePress}>
-        <View
-          className=""
-          // style={{ flexDirection: "column", height: "100%" }}
-        >
-          <View className="w-full min-h-[450px] max-h-[450px] bg-neutral-500">
-            <Image
-              source={{ uri: movie.poster_path }}
-              className="h-full w-full"
-            />
-          </View>
-          {/* <View
-          style={{
-            width: "100%",
-            minHeight: 450,
-            backgroundColor: "#6c6c6c",
-          }}
-        >
-          {movie.poster_path && (
-            <Image
-              source={{ uri: movie.poster_path }}
-              style={{ height: "100%", width: "100%" }}
-              resizeMode="cover"
-            />
-          )}
-        </View> */}
+    <View className="w-full rounded-lg max-w-2xs card h-full max-h-[498px] card-compact bg-base-100 shadow-xl">
+      <Pressable onPress={handlePress} className="h-full">
+        <View className="w-full min-h-[450px] max-h-[450px] bg-neutral-500">
+          <Image
+            source={{ uri: movie.poster_path }}
+            className="h-full w-full"
+          />
+        </View>
 
-          <Text className="text-white">{upperFirst(movie.title)}</Text>
+        <View className="card-body !py-2 justify-center px-4">
+          <Text className="text-white card-title">
+            {upperFirst(movie.title)}
+          </Text>
         </View>
       </Pressable>
       {/* <MovieButtons id={movie.id} /> */}
