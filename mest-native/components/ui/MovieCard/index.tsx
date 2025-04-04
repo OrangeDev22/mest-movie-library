@@ -18,7 +18,7 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
   };
 
   return (
-    <View className="w-full rounded-lg max-w-2xs card h-full max-h-[498px] card-compact bg-base-100 shadow-xl">
+    <View className="min-w-[300px] w-full mx-auto rounded-lg max-w-2xs card h-full max-h-[498px] card-compact bg-base-100 shadow-xl">
       <Pressable onPress={handlePress} className="h-full">
         <View className="w-full min-h-[450px] max-h-[450px] bg-neutral-500">
           <Image

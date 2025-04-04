@@ -4,14 +4,13 @@ import { twMerge } from "tailwind-merge";
 import MovieCard from "../MovieCard";
 
 interface Props {
-  data: any;
+  movies: any;
   loading?: boolean;
   rootClassName?: string;
 }
 
-const MovieList: React.FC<Props> = ({ data, loading, rootClassName }) => {
-  console.log("--data", data);
-  if (!data?.getTrendingMovies) return null;
+const MovieList: React.FC<Props> = ({ movies, loading, rootClassName }) => {
+  if (!movies) return null;
 
   return (
     <ScrollView className="w-full h-full">
@@ -21,7 +20,7 @@ const MovieList: React.FC<Props> = ({ data, loading, rootClassName }) => {
           rootClassName
         )}
       >
-        {data?.getTrendingMovies?.movies.map((movie: any) => (
+        {movies.map((movie: any) => (
           <MovieCard movie={movie} key={movie.id} />
         ))}
       </View>
